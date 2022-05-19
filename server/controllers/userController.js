@@ -15,7 +15,7 @@ module.exports = {
         User.findOne({ _id: req.params.id })
         .then((dbUser) => 
         !dbUser
-            ? res.status(404).json({ message: 'No user found with this id! '})
+            ? res.status(404).json({ message: 'No user found with this id!'})
             : res.json(dbUser)
         )
         .catch((err) => res.json(err)); 

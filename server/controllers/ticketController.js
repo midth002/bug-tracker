@@ -2,7 +2,7 @@ const Ticket = require('../models/Ticket');
 const User = require('../models/User');
 
 module.exports = {
-    createThought(req, res) {
+    createTicket(req, res) {
         Ticket.create(req.body)
         .then((ticket) => {
             return User.findOneAndUpdate(
@@ -19,5 +19,10 @@ module.exports = {
         .catch((err) => {
             return res.status(500).json(err)
         })
+    },
+    getTickets(req, res) {
+        Ticket.find()
+        .then((tickets) => res.json(tickets))
+        .catch((err) => res.status(500).json(err))
     }
 }

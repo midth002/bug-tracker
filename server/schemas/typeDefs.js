@@ -31,6 +31,7 @@ type Project {
     description: String
     type: String!
     ticketId: [Ticket]
+    status: String!
 }
 
 type Query {
@@ -43,9 +44,9 @@ type Query {
 }
 
 type Mutation {
-    createUser(userId: ID, username: String!, email: String!, role: String!): User
+    createUser(username: String!, email: String!, role: String!, password: String!): User
     createTicket( submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
-    createProject(projectId: ID, title: String!, description: String, type: String!): Project
+    createProject(title: String!, description: String, type: String!): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
     login(username: String!, password: String!): Auth
 }

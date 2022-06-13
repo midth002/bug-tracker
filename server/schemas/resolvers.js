@@ -28,9 +28,10 @@ const resolvers = {
         createTicket: async(parent, args) => {
             return await Ticket.create(args);
         },
-        createUser: async(parent, args) => {
-            const user = await User.create(args);
-            return { user };
+        createUser: async(parent, { username, email, password, role}) => {
+            const user = await User.create({username, email, password, role});
+            const token = signToken(user)
+            return { token, user };
         },
         createProject: async(parent, args) => {
             const project = await Project.create(args);

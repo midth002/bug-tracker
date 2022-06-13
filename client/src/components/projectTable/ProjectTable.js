@@ -1,13 +1,30 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import Loading from '../loading/Loading';
 
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 60 },
+
+ const ProjectTable = () => {
+
+
+  const { loading: projectsLoading, data: projectData, error} = useQuery(QUERY_PROJECTS);
+  const [tableData, setTableData] = useState([])
+
+  if (projectsLoading) return <Loading />;
+  if (!projectData) return <p>Not found</p>;
+  const getProjects = async () => {
+    const projects = await projectData?.allProjects || [];
+    setTableData(projects);
+    return console.log(typeof projects);
+  }
+
+  getProjects();
+
+  const columns = [
+    { field: '_id', headerName: 'ID', width: 150 },
     {
       field: 'title',
       headerName: 'Project Name',
@@ -15,7 +32,7 @@ const columns = [
       editable: false,
     },
     {
-      field: 'lastName',
+      field: 'description',
       headerName: 'Description',
       width: 250,
       editable: false,
@@ -26,15 +43,10 @@ const columns = [
       width: 110,
       editable: false,
     },
-    {
-      field: 'date_created',
-      headerName: 'Date Created',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 125,
-    },
  
   ];
+
+
   
   const rows = [
     { id: 1, lastName: 'Snow', title: 'Bug tracker', status: 'In-progress', date_created: '5/14/22' },
@@ -43,23 +55,14 @@ const columns = [
  
   ];
   
- const ProjectTable = () => {
 
-  const { loading: projectsLoading, data: projectData, error} = useQuery(QUERY_PROJECTS);
-
-  if (projectsLoading) return <Loading />;
-  if (!projectData) return <p>Not found</p>;
-  const getProjects = async () => {
-    const projects = await projectData?.allProjects || [];
-    return console.log(projects);
-  }
-
-  getProjects();
+ 
    
     return (
       <div className="project-table" style={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={rows}
+          rows={tableData}
+          getRowId={row => row._id}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}

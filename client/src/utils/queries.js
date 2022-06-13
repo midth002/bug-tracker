@@ -5,10 +5,6 @@ query allProjects {
   allProjects {
     _id
     title
-    ticketId {
-      _id
- 
-    }
     description
     status
   }

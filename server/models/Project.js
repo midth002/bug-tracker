@@ -17,16 +17,14 @@ const projectSchema = new Schema (
             type: String,
             required: true
         },
-        tickets : [
-            {
+        ticketId : [{
                 type: Schema.Types.ObjectId,
                 ref: 'ticket',
-            },
-        ],
+            }],
     }, 
     {
         toJSON: {
-            getters: true,
+            virtuals: true,
         },
         id: false,
     }

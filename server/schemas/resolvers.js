@@ -29,6 +29,17 @@ const resolvers = {
         createUser: async(parent, args) => {
             const user = await User.create(args);
             return { user };
+        },
+        createProject: async(parent, args) => {
+            const project = await Project.create(args);
+            return project;
+        },
+        addTicketToProject: async(parent, {projectId, ticketId}) => {
+            return await Project.findOneAndUpdate(
+                {_id: projectId},
+                {$push: {ticketId: ticketId}},
+                {new: true}
+            ).populate('ticketId')
         }
     }
 }

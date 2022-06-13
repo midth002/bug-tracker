@@ -17,7 +17,6 @@ type User {
     username: String!
     email: String!
     role: String!
-    tickets: [Ticket]
 }
 
 type Project {
@@ -39,7 +38,7 @@ type Query {
 
 type Mutation {
     createUser(userId: ID, username: String!, email: String!, role: String!): User
-    createTicket(ticketId: ID, title: String!, description: String, priority: String!, type: String!): Ticket
+    createTicket( submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
 }
 `
 

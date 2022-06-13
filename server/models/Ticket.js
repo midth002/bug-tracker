@@ -18,10 +18,10 @@ const ticketSchema = new Schema (
             type: Date, 
             default: Date.now,
         }, 
-        submitter: {
+        submitter: [{
             type: Schema.Types.ObjectId,
             ref: 'user'
-        },
+        }],
         priority: {
             type: String,
             required: true

@@ -23,12 +23,8 @@ const resolvers = {
     },
 
     Mutation: {
-        createTicket: async(parent, args, context) => {
-            if (context.user) {
-                const ticket = new Ticket({ args });
-               await User.findByIdAndUpdate(context.user._id, args, { new: true})
-               return ticket;
-            }
+        createTicket: async(parent, args) => {
+            return await Ticket.create(args);
         },
         createUser: async(parent, args) => {
             const user = await User.create(args);

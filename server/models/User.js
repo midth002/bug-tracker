@@ -17,13 +17,7 @@ const userSchema = new Schema (
         role: {
             type: String, 
             required: true
-        },
-        tickets : [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'ticket',
-            },
-        ],
+        }
         
     }, 
     {

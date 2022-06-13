@@ -1,12 +1,10 @@
 import React from 'react';
-
+import { useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECTS } from "../../utils/queries";
+import Loading from '../loading/Loading';
 
-
-const { loading: staffProjects, data: projectData } = useQuery(QUERY_STAFF_PICKS);
-console.log(projectData)
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
@@ -46,6 +44,18 @@ const columns = [
   ];
   
  const ProjectTable = () => {
+
+  const { loading: projectsLoading, data: projectData, error} = useQuery(QUERY_PROJECTS);
+
+  if (projectsLoading) return <Loading />;
+  if (!projectData) return <p>Not found</p>;
+  const getProjects = async () => {
+    const projects = await projectData?.allProjects || [];
+    return console.log(projects);
+  }
+
+  getProjects();
+   
     return (
       <div className="project-table" style={{ height: 400, width: '100%' }}>
         <DataGrid

@@ -1,15 +1,17 @@
 import React from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_USER } from '../../utils/mutations';
+// import Dashboard from '../dashboard/Dashboard';
 
 const Signup = () => {
     const [formState, setFormState] = useState({
         userName: '',
         email: '',
         password: '',
+        role: '',
       });
       const [addUser, { error, data }] = useMutation(ADD_USER);
       // update state based on form input changes
@@ -38,13 +40,13 @@ const Signup = () => {
     };
   
     return (
-      <main className=" justify-center mb-4 container signup">
+      <main className="justify-center mb-4 container signup">
             <div className="flex-row content card justify-center col-md6 col-lg-5 wrap-signup">
                 <div className="card-body">
               {data ? (
                 <p>
-                  Success! You may now head{' '}
-                  <Link to="/">back to the homepage.</Link>
+                 {/* <Dashboard /> */}
+                 You have signed up!
                 </p>
               ) : (
                 <form onSubmit={handleFormSubmit} className="signup-form">
@@ -53,7 +55,7 @@ const Signup = () => {
                   <input
                     className="form-input"
                     // placeholder="Your username"
-                    name="userName"
+                    name="username"
                     type="text"
                     value={formState.userName}
                     onChange={handleChange}
@@ -70,6 +72,18 @@ const Signup = () => {
                     onChange={handleChange}
                     required
                   /><label>Email</label></div>
+                  <div className="validate-input form-input-wrap">
+                  <input
+                    className="form-input"
+                    // placeholder="Your username"
+                    name="role"
+                    type="text"
+                    value={formState.userName}
+                    onChange={handleChange}
+                    required
+                  /><label>Role</label>
+                  
+                  </div>
                    <div className="validate-input form-input-wrap">
                   <input
                     className="form-input"
@@ -80,6 +94,7 @@ const Signup = () => {
                     required
                   /><label>Password</label>
                   </div>
+
                   {error && (
                     <div className="signup-error">
                       {error.message}

@@ -17,6 +17,11 @@ const projectSchema = new Schema (
             type: String,
             required: true
         },
+        status: {
+            type: String,
+            required: true,
+            default: 'in-progress'
+        },
         ticketId : [{
                 type: Schema.Types.ObjectId,
                 ref: 'ticket',

@@ -6,19 +6,19 @@ const Menu = () => {
     <div className="menu">
         <ul>
             <li>
-                Dashboard
+                <a href='/'>Dashboard</a>
             </li>
             <li>
-                User Roles
+              <a href='/userRoles'>User Roles</a>
             </li>
             <li>
-                Projects
+                <a href='/projects'>Projects</a>
             </li>
             <li>
-                My Tickets
+                <a href='/tickets'>Tickets</a>
             </li>
             <li>
-                My Projects
+               <a href='myProjects'>My Projects</a>
             </li>
         </ul>
     </div>

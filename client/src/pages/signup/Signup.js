@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
-// import Dashboard from '../dashboard/Dashboard';
+import Dashboard from '../dashboard/Dashboard';
 
 const Signup = () => {
     const [formState, setFormState] = useState({
@@ -38,16 +38,17 @@ const Signup = () => {
       }
   
     };
+
+    const alertSignedUp = (newUser) => {
+      alert('Welcome ' + newUser)
+    }
   
     return (
-      <main className="justify-center mb-4 container signup">
-            <div className="flex-row content card justify-center col-md6 col-lg-5 wrap-signup">
-                <div className="card-body">
+      <>
               {data ? (
-                <p>
-                 {/* <Dashboard /> */}
-                 You have signed up!
-                </p>
+             
+                <Link to="/">Head to the dashboard.</Link>
+              
               ) : (
                 <form onSubmit={handleFormSubmit} className="signup-form">
                 <span className='signup-form-title p-b-0 text-primary'>Create an account</span>
@@ -107,9 +108,7 @@ const Signup = () => {
                     </p>
                 </form>
               )}
-            </div>
-          </div>
-      </main>
+              </>
     );
 }
 

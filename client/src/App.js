@@ -1,5 +1,6 @@
 
 import Dashboard from './pages/dashboard/Dashboard';
+import Signup from './pages/signup/Signup';
 import './App.scss';
 import {
   ApolloClient,
@@ -42,6 +43,7 @@ function App() {
     <Routes> 
       <Route path='/' element={<Dashboard />} />
       <Route path='/projects' element={<Projects />} />
+      <Route path='/signup' element={<Signup />} />
     </Routes>
     </Router>
 

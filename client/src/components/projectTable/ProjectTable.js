@@ -24,7 +24,7 @@ import Loading from '../loading/Loading';
   getProjects();
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 150 },
+    { field: '_id', headerName: 'ID', width: 250 },
     {
       field: 'title',
       headerName: 'Project Name',
@@ -34,7 +34,7 @@ import Loading from '../loading/Loading';
     {
       field: 'description',
       headerName: 'Description',
-      width: 250,
+      width: 350,
       editable: false,
     },
     {

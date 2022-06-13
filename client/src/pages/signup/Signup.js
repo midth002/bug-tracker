@@ -8,7 +8,7 @@ import { ADD_USER } from '../../utils/mutations';
 
 const Signup = () => {
     const [formState, setFormState] = useState({
-        userName: '',
+        username: '',
         email: '',
         password: '',
         role: '',
@@ -57,7 +57,7 @@ const Signup = () => {
                     // placeholder="Your username"
                     name="username"
                     type="text"
-                    value={formState.userName}
+                    value={formState.username}
                     onChange={handleChange}
                     required
                   /><label>Username</label>
@@ -78,7 +78,7 @@ const Signup = () => {
                     // placeholder="Your username"
                     name="role"
                     type="text"
-                    value={formState.userName}
+                    value={formState.role}
                     onChange={handleChange}
                     required
                   /><label>Role</label>

@@ -14,6 +14,12 @@ const userSchema = new Schema (
             unique: true,
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
         },
+        password : {
+            type: String,
+            required: true,
+            minlength: 8
+        },
+
         role: {
             type: String, 
             required: true

@@ -17,6 +17,12 @@ type User {
     username: String!
     email: String!
     role: String!
+    password: String!
+}
+
+type Auth {
+    token: ID!
+    user: User
 }
 
 type Project {
@@ -41,6 +47,7 @@ type Mutation {
     createTicket( submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
     createProject(projectId: ID, title: String!, description: String, type: String!): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
+    login(username: String!, password: String!): Auth
 }
 `
 

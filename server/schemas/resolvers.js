@@ -1,4 +1,6 @@
 const { Project, Ticket, User } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -40,7 +42,19 @@ const resolvers = {
                 {$push: {ticketId: ticketId}},
                 {new: true}
             ).populate('ticketId')
-        }
+        }, 
+        login: async (parent, { username, password }) => {
+            const user = await User.findOne({ username });
+            if (!user) {
+                throw new AuthenticationError('No profile with this email found!');
+            }
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect password!');
+            }
+            const token = signToken(user);
+            return { token, user };
+            },
     }
 }
 

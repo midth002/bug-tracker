@@ -47,14 +47,6 @@ import Loading from '../loading/Loading';
   ];
 
 
-  
-  const rows = [
-    { id: 1, lastName: 'Snow', title: 'Bug tracker', status: 'In-progress', date_created: '5/14/22' },
-    { id: 2, lastName: 'Lannister', title: 'Project Poke', status: 'Resolved', date_created: '5/26/22' },
-    { id: 3, lastName: 'Lannister', title: 'Brewery API', status: 'Done', date_created: '3/30/22' },
- 
-  ];
-  
 
  
    

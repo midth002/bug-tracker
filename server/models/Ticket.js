@@ -29,7 +29,11 @@ const ticketSchema = new Schema (
         type: {
            type: String,
            required: true 
-        }  
+        },
+        isOpen: {
+            type: Boolean,
+            default: true
+        },
     },
     {
         toJSON: {

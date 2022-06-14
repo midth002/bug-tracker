@@ -15,6 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import Auth from '../../utils/auth';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -99,6 +100,7 @@ export default function Navbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => {handleMenuClose; Auth.logout()}}>Logout</MenuItem> 
     </Menu>
   );
 

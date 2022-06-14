@@ -36,9 +36,9 @@ type Project {
 
 type Query {
     allTickets: [Ticket]!
-    getOneTicket(_id: ID): Ticket!
+    getOneTicket(ticketId: ID): Ticket!
     allProjects: [Project]!
-    getOneProject(_id: ID): Project!
+    getOneProject(projectId: ID): Project!
     allUsers: [User]!
     getOneUser(username: String!): User!
 }

@@ -43,7 +43,7 @@ function App() {
     <Router>
     <Routes> 
       <Route path='/:username' element={<Dashboard />} />
-      <Route path='/projects' element={<Projects />} />
+      <Route path='/:username/projects' element={<Projects />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
     </Routes>

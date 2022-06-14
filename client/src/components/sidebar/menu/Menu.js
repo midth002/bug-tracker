@@ -2,6 +2,10 @@ import React from 'react';
 import './menu.scss';
 
 const Menu = () => {
+
+  const params = window.location.href;
+    const paramArray = params.split('/');
+
   return (
     <div className="menu">
         <ul>
@@ -9,16 +13,16 @@ const Menu = () => {
                 <a href='/'>Dashboard</a>
             </li>
             <li>
-              <a href='/userRoles'>User Roles</a>
+              <a href={`/${paramArray[3]}/users`}>User Roles</a>
             </li>
             <li>
-                <a href='/projects'>Projects</a>
+                <a href={`/${paramArray[3]}/projects`}>Projects</a>
             </li>
             <li>
-                <a href='/tickets'>Tickets</a>
+                <a href={`/${paramArray[3]}/tickets`}>Tickets</a>
             </li>
             <li>
-               <a href='myProjects'>My Projects</a>
+               <a href={`/${paramArray[3]}/myprojects`}>My Projects</a>
             </li>
         </ul>
     </div>

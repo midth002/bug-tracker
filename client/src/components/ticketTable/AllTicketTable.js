@@ -3,7 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS} from "../../utils/queries";
 import Loading from '../loading/Loading';
-
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import React from 'react';
 
 const AllTicketTable = () => {
@@ -16,9 +17,17 @@ const AllTicketTable = () => {
     const getTickets = async () => {
         const tickets = await ticketsData?.allTickets || [];
         setTableData(tickets);
-        return console.log(tickets)
     }
 
+   const showTicketId = () => {
+    console.log('this worked');
+   }
+
+
+  const handleClick = (event, value) => {
+    console.log(event, value);
+  }
+ 
     getTickets();
 
     const columns = [
@@ -41,7 +50,28 @@ const AllTicketTable = () => {
           width: 110,
           editable: false,
         },
-     
+        {
+            field: "Edit",
+            renderCell: (cellValues) => {
+              return (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={(event) => {
+                    handleClick(event, cellValues);
+                  }}
+                >
+                  Edit
+                </Button>
+              );
+            }
+          },
+          {
+            field: "Route",
+            renderCell: (cellValues) => {
+              return <Link href='https://www.google.com/'>Link</Link>;
+            }
+          }
       ];
     
 

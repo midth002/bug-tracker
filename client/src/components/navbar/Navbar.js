@@ -67,7 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const params = window.location.href;
-    const paramArray = params.split('/');
+const paramArray = params.split('/');
    
 
 export default function Navbar() {

@@ -11,13 +11,13 @@ const SingleTicket = () => {
         <Sidebar />
         <div className="projects">
             <div className="project-header">
-            <h4>All Tickets</h4>
+            <h4>Ticket # </h4>
                 
             </div>
-        <AllTicketTable />
+        
         </div>
     </div>
       )
 }
 
-export default SingleTicket
+export default SingleTicket;

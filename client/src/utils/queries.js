@@ -18,3 +18,15 @@ query getOneUser($username: String!) {
   }
 }
 `;
+
+export const QUERY_TICKETS = gql`
+query allTickets{
+  allTickets {
+    _id
+    title
+    description
+    priority
+    type
+    isOpen
+  }
+}`

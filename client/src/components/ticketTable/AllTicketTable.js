@@ -1,15 +1,28 @@
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from "@apollo/client";
-import { QUERY_PROJECTS } from "../../utils/queries";
+import { QUERY_TICKETS} from "../../utils/queries";
 import Loading from '../loading/Loading';
 
-import React from 'react'
+import React from 'react';
 
 const AllTicketTable = () => {
 
+    const { loading: ticketsLoading, data: ticketsData, error} = useQuery(QUERY_TICKETS);
+    const [tableData, setTableData] = useState([])
+
+    if (ticketsLoading) return <Loading />;
+    if (!ticketsData) return <p>Not Found</p>;
+    const getTickets = async () => {
+        const tickets = await ticketsData?.allTickets || [];
+        setTableData(tickets);
+        return console.log(tickets)
+    }
+
+    getTickets();
+
     const columns = [
-        { field: 'id', headerName: 'ID', width: 250 },
+        { field: '_id', headerName: 'ID', width: 250 },
         {
           field: 'title',
           headerName: 'Ticket Name',
@@ -23,8 +36,8 @@ const AllTicketTable = () => {
           editable: false,
         },
         {
-          field: 'status',
-          headerName: 'Status',
+          field: 'priority',
+          headerName: 'Priority',
           width: 110,
           editable: false,
         },
@@ -32,16 +45,15 @@ const AllTicketTable = () => {
       ];
     
 
-      const rows = [
-        {id: 1, description: 'my own description', status: 'not done'},
-      ]
+     
 
 
 
   return (
     <div className="ticket-table" style={{ height: 400, width: '100%' }}>
     <DataGrid
-      rows={rows}
+      rows={tableData}
+      getRowId={row => row._id}
       columns={columns}
       pageSize={5}
       rowsPerPageOptions={[5]}

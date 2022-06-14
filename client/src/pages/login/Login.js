@@ -29,8 +29,8 @@ const Login = () => {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log(data)
-      Auth.login(data.login.token);
+      
+      Auth.login(data.login.token, data.login.user.username);
     } catch (e) {
       console.error(e);
     }
@@ -45,8 +45,8 @@ const Login = () => {
        <>
                 {data ? (
                  
-                    
-                  window.location.href="/"
+                   <p>Success</p>
+                
                   
                 ) : (
                   <form onSubmit={handleFormSubmit} className="login-form">

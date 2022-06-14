@@ -16,6 +16,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Auth from '../../utils/auth';
+import { useQuery } from "@apollo/client";
+import { QUERY_USERNAME } from '../../utils/queries';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,6 +60,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 

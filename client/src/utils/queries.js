@@ -10,3 +10,11 @@ query allProjects {
   }
 }
 `;
+
+export const QUERY_USERNAME = gql`
+query getOneUser($username: String!) {
+  getOneUser(username: $username) {
+    username
+  }
+}
+`;

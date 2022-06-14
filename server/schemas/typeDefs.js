@@ -40,7 +40,7 @@ type Query {
     allProjects: [Project]!
     getOneProject(_id: ID): Project!
     allUsers: [User]!
-    getOneUser(_id: ID): User!
+    getOneUser(username: String!): User!
 }
 
 type Mutation {

@@ -19,8 +19,8 @@ const resolvers = {
         getOneProject: async (parent, {projectId}) => {
             return await Project.findOne({_id: projectId})
         },
-        getOneUser: async (parent, {userId}) => {
-            return await User.findOne({_id: userId})
+        getOneUser: async (parent, {username}) => {
+            return await User.findOne({username})
         }
     },
 

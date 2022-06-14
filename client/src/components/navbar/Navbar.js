@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,6 +19,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Auth from '../../utils/auth';
 import { useQuery } from "@apollo/client";
 import { QUERY_USERNAME } from '../../utils/queries';
+import { queryString }from '../../utils/params';
+import { useSearchParams } from 'react-router-dom';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -34,6 +38,9 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
+
+
+
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -59,8 +66,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const params = window.location.href;
+    const paramArray = params.split('/');
+   
+
 export default function Navbar() {
 
+
+ 
+    
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -180,7 +194,7 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Demo1
+            {paramArray[3]}
           </Typography>
           <Search>
             <SearchIconWrapper>

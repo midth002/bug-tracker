@@ -46,7 +46,7 @@ const Login = () => {
                 {data ? (
                  
                     
-                    <Link to="/">You are logged in</Link>
+                  window.location.href="/"
                   
                 ) : (
                   <form onSubmit={handleFormSubmit} className="login-form">

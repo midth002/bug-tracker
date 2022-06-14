@@ -47,7 +47,7 @@ const Signup = () => {
       <>
               {data ? (
              
-                <Link to="/">Head to the dashboard.</Link>
+                window.location.href="/"
               
               ) : (
                 <form onSubmit={handleFormSubmit} className="signup-form">

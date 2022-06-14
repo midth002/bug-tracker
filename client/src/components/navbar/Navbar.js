@@ -100,7 +100,7 @@ export default function Navbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={() => {handleMenuClose; Auth.logout()}}>Logout</MenuItem> 
+      <MenuItem onClick={() => {Auth.logout(); {window.location.href="/login"}}}>Logout</MenuItem> 
     </Menu>
   );
 

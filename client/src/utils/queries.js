@@ -29,4 +29,20 @@ query allTickets{
     type
     isOpen
   }
+}
+`;
+
+export const QUERY_ONE_TICKET = gql`
+query GetOneTicket($ticketId: ID) {
+  getOneTicket(ticketId: $ticketId) {
+    _id
+    title
+    description
+    submitter {
+      _id
+    }
+    priority
+    type
+    isOpen
+  }
 }`

@@ -56,6 +56,13 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
             },
+        // addTicketComment: async(parent, {ticketId, userId}) => {
+        //    return await Ticket.findOneAndUpdate(
+        //         {_id: ticketId},
+        //         {$push: }
+        //    );
+
+        // }
     }
 }
 

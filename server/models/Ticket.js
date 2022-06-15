@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+const commentSchema = require('./Comment');
 
 const ticketSchema = new Schema (
     {
@@ -34,6 +34,7 @@ const ticketSchema = new Schema (
             type: Boolean,
             default: true
         },
+        comments: [commentSchema]
     },
     {
         toJSON: {

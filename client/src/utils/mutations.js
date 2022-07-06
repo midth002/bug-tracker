@@ -25,3 +25,12 @@ mutation login($username: String!, $password: String!) {
   }
 }
 `;
+
+export const UPDATE_STATUS = gql`
+mutation UpdateStatus($id: ID!, $status: String!) {
+  updateStatus(_id: $id, status: $status) {
+    _id
+    title
+    status
+  }
+}`;

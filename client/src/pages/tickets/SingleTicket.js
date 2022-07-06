@@ -47,7 +47,7 @@ const SingleTicket = () => {
                     <ProgressBar status={ticketData.getOneTicket.status}/>
                 </div>
                 <div className='ticketForm'>
-                    <TicketForm ticketId={ticketNum}/>
+                    <TicketForm priority={ticketData.getOneTicket.priority} description={ ticketData.getOneTicket.description} />
                 </div>
             </div>
         

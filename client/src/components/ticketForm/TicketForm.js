@@ -8,26 +8,23 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-import Select from '@mui/material/Select';
+// import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField'
 import './ticketform.scss';
 import Loading from '../loading/Loading';
 import DescriptionField from '../multilineTextFields/MultilineTextFields';
 import { QUERY_ONE_TICKET } from '../../utils/queries';
+import Select from 'react-select'
 import { useQuery } from "@apollo/client";
 
-const TicketForm = ({ ticketId }) => {
-   
-  const {loading: ticketLoading, data: ticketData, refetch} = useQuery(QUERY_ONE_TICKET, {
-    variables: {ticketId: ticketId}
-});
+const options = [
+  {value: 'Low', label: 'Low' },
+  {value: 'Medium', label: 'Medium' },
+  {value: 'High', label: 'High' }
+  ]
 
+const TicketForm = ({ priority, description }) => {
 
-if (ticketLoading) return <Loading />; 
-
-const data = ticketData?.getOneTicket || [];
-const priorityData = data.priority;
-const descriptionData = data.description
-    
   
    
   return (
@@ -37,15 +34,27 @@ const descriptionData = data.description
       <Box sx={{ bgcolor: 'white', height: '60vh' }} component='form'>
       <FormControl sx={{ m: 1, minWidth: 80 }}>
       <FormHelperText>Priority</FormHelperText>
-      <Select
+      {/* <Select
           defaultValue={priorityData}
         >
         <MenuItem value={'high'}>High</MenuItem>
           <MenuItem value={'moderate'}>Moderate</MenuItem>
           <MenuItem value={'low'}>Low</MenuItem>
-          </Select>
+          </Select> */}
+
+          <Select
+          placeholder={priority}
+          defaultValue={priority}
+          options={options}
+          />
+
+
+
         </FormControl>
-        <DescriptionField description={descriptionData}/>
+        <div>
+          <div><label>Description</label></div>
+          <textarea className="description-text" rows="3" cols="50" defaultValue={description}></textarea>
+        </div>
       </Box>
   
     </Container>

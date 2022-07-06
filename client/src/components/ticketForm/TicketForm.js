@@ -17,13 +17,14 @@ import { QUERY_ONE_TICKET } from '../../utils/queries';
 import Select from 'react-select'
 import { useQuery } from "@apollo/client";
 
+
 const options = [
   {value: 'Low', label: 'Low' },
   {value: 'Medium', label: 'Medium' },
   {value: 'High', label: 'High' }
   ]
 
-const TicketForm = ({ priority, description }) => {
+const TicketForm = ({ priority, description, type, created, submitter }) => {
 
   
    
@@ -54,6 +55,18 @@ const TicketForm = ({ priority, description }) => {
         <div>
           <div><label>Description</label></div>
           <textarea className="description-text" rows="3" cols="50" defaultValue={description}></textarea>
+        </div>
+        <div>
+          <h5>Submitter</h5>
+          <p>{submitter}</p>
+        </div>
+        <div>
+          <h5>Type</h5>
+          <p>{type}</p>
+        </div>
+        <div>
+          <h5>Date Created</h5>
+          <p>{created}</p>
         </div>
       </Box>
   

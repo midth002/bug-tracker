@@ -44,5 +44,6 @@ query GetOneTicket($ticketId: ID) {
     priority
     type
     status
+    createdAt
   }
 }`

@@ -49,6 +49,7 @@ type Mutation {
     createProject(title: String!, description: String, type: String!): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
     login(username: String!, password: String!): Auth
+    updateStatus(_id: ID!, status: String!): Ticket
 }
 `
 

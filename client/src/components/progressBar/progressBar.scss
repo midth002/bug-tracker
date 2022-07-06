@@ -1,0 +1,26 @@
+
+.bar-container {
+    display: inline!important;
+    list-style: none;
+
+    .bar {
+        background-color: #1976d2;
+        width: 18%;
+        display: inline-block;
+        text-align: center;
+        border: 1px solid white;
+       
+        height: 30px;
+        
+         
+        p {
+            margin: 0;
+            color: white;
+        }
+
+    }
+
+    .active-bar {
+        background-color: green;
+    }
+}

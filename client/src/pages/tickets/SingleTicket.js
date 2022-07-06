@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Stepper from '../../components/stepper/Stepper';
@@ -7,10 +7,12 @@ import './singleticket.scss';
 
 
 const SingleTicket = () => {
-    const params = window.location.href;
-    const paramArray = params.split('/');
-    const ticketNum = paramArray[5]
-   
+
+ 
+        const params = window.location.href;
+        const paramArray = params.split('/');
+        const ticketNum = paramArray[4]
+        console.log(params)
 
     return (
         <div className="container">

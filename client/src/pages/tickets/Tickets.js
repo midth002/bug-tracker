@@ -6,6 +6,11 @@ import AllTicketTable from '../../components/ticketTable/AllTicketTable';
 
 
 const Tickets = () => {
+
+  const params = window.location.href;
+  const paramArray = params.split('/');
+  const user = paramArray[3]
+
   return (
     <div className="container">
     <div className='navbar'>
@@ -17,7 +22,7 @@ const Tickets = () => {
         <h4>All Tickets</h4>
             
         </div>
-    <AllTicketTable />
+    <AllTicketTable user={user}/>
     </div>
 </div>
   )

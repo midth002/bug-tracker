@@ -4,10 +4,10 @@ import { useQuery } from "@apollo/client";
 import { QUERY_TICKETS} from "../../utils/queries";
 import Loading from '../loading/Loading';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
-const AllTicketTable = () => {
+const AllTicketTable = ({user}) => {
 
     const { loading: ticketsLoading, data: ticketsData, error} = useQuery(QUERY_TICKETS);
     const [tableData, setTableData] = useState([])
@@ -69,7 +69,8 @@ const AllTicketTable = () => {
           {
             field: "Route",
             renderCell: (cellValues) => {
-              return <Link href='https://www.google.com/'>Link</Link>;
+              
+              return <Link to={`/${user}/tickets/${cellValues.id}`}>Open Ticket</Link>;
             }
           }
       ];

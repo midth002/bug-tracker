@@ -5,12 +5,13 @@ const Menu = () => {
 
   const params = window.location.href;
     const paramArray = params.split('/');
+    console.log(paramArray);
 
   return (
     <div className="menu">
         <ul>
             <li>
-                <a href='/'>Dashboard</a>
+                <a href={`/${paramArray[3]}`}>Dashboard</a>
             </li>
             <li>
               <a href={`/${paramArray[3]}/users`}>User Roles</a>

@@ -27,7 +27,7 @@ query allTickets{
     description
     priority
     type
-    isOpen
+    status
   }
 }
 `;
@@ -43,6 +43,6 @@ query GetOneTicket($ticketId: ID) {
     }
     priority
     type
-    isOpen
+    status
   }
 }`

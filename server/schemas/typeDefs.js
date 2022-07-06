@@ -9,7 +9,7 @@ type Ticket {
     submitter: [User]
     priority: String!
     type: String!
-    isOpen: Boolean
+    status: String!
 }
 
 type User {

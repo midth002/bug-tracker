@@ -6,11 +6,16 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const steps = ['New', 'Wroking', 'Resolved', 'Closed'];
+const steps = ['New', 'Working', 'Resolved', 'Closed'];
 
-export default function StepperProgress() {
+export default function StepperProgress({status}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+
+
+  const setStatus = () => {
+    setActiveStep(status)
+  }
 
   const isStepOptional = (step) => {
     return step === 1;

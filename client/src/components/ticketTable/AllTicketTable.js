@@ -19,19 +19,16 @@ const AllTicketTable = ({user}) => {
         setTableData(tickets);
     }
 
-   const showTicketId = () => {
-    console.log('this worked');
-   }
-
+    getTickets();
 
   const handleClick = (event, value) => {
     console.log(event, value);
   }
  
-    getTickets();
+  
 
     const columns = [
-        { field: '_id', headerName: 'ID', width: 250 },
+        { field: '_id', headerName: 'ID', width: 200 },
         {
           field: 'title',
           headerName: 'Ticket Name',
@@ -47,27 +44,17 @@ const AllTicketTable = ({user}) => {
         {
           field: 'priority',
           headerName: 'Priority',
-          width: 110,
+          width: 100,
           editable: false,
         },
         {
-            field: "Edit",
-            renderCell: (cellValues) => {
-              return (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={(event) => {
-                    handleClick(event, cellValues);
-                  }}
-                >
-                  Edit
-                </Button>
-              );
-            }
-          },
-          {
-            field: "Route",
+          field: 'status',
+          headerName: 'status',
+          width: 100,
+          editable: false,
+        },
+        {
+            field: "Link",
             renderCell: (cellValues) => {
               
               return <Link to={`/${user}/tickets/${cellValues.id}`}>Open Ticket</Link>;

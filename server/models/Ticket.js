@@ -30,9 +30,10 @@ const ticketSchema = new Schema (
            type: String,
            required: true 
         },
-        isOpen: {
-            type: Boolean,
-            default: true
+        status: {
+            type: String,
+            required: true,
+            default: "new"
         },
         comments: [commentSchema]
     },

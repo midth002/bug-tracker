@@ -10,6 +10,7 @@ type Ticket {
     priority: String!
     type: String!
     status: String!
+    createdAt: String
 }
 
 type User {

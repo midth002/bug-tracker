@@ -34,3 +34,17 @@ mutation UpdateStatus($id: ID!, $status: String!) {
     status
   }
 }`;
+
+export const CREATE_TICKET = gql`
+mutation Mutation($submitter: ID!, $title: String!, $priority: String!, $type: String!, $description: String) {
+  createTicket(submitter: $submitter, title: $title, priority: $priority, type: $type, description: $description) {
+    status
+    type
+    submitter {
+      _id
+    }
+    description
+    title
+    _id
+  }
+}`;

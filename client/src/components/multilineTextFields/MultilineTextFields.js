@@ -21,7 +21,7 @@ export default function MultilineTextFields({description}) {
       <div>
       <TextField
           id="outlined-multiline-static"
-          label="Multiline"
+          label="Description"
           multiline
           rows={8}
           defaultValue={description}

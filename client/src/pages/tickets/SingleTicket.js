@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Stepper from '../../components/stepper/Stepper';
+import ProgressBar from '../../components/progressBar/ProgressBar';
 import TicketForm from '../../components/ticketForm/TicketForm';
 import Loading from '../../components/loading/Loading';
 import { useQuery } from "@apollo/client";
@@ -26,6 +27,7 @@ const SingleTicket = () => {
 
       const getTicketInformation = async () => {
         console.log(ticketData.getOneTicket.priority)
+        console.log(ticketData.getOneTicket.status)
       }
 
     getTicketInformation();
@@ -42,7 +44,7 @@ const SingleTicket = () => {
                 <h4>Ticket # {paramArray[5]}</h4>
             </div>
                 <div className='stepper'>
-                    <Stepper />
+                    <ProgressBar status={ticketData.getOneTicket.status}/>
                 </div>
                 <div className='ticketForm'>
                     <TicketForm ticketId={ticketNum}/>

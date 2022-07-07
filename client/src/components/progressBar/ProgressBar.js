@@ -37,10 +37,10 @@ const ProgressBar = ({status, ticketId}) => {
     <div>
         <ul className="bar-container">
             <li className="active-bar bar" id="New" onClick={changeTicketStatus} value="New">New</li>
-            <li className={`${status == 'Working' ? "active-bar bar" : "bar"}`} id="Working" onClick={changeTicketStatus} value="Working">Working</li>
-            <li className="bar" id="Needs_Help"><p>Needs Help</p></li>
-            <li className="bar" id="Resolved"><p>Resolved</p></li>
-            <li className="bar" id="Closed"><p>Closed</p></li>
+            <li className={`${status === 'Working' || status == 'Needs_Help' || status == 'Resolved' || status == 'Closed' ? "active-bar bar" : "bar"}`} id="Working" onClick={changeTicketStatus} value="Working">Working</li>
+            <li className={`${status == 'Needs_Help' || status == 'Resolved' || status == 'Closed' ? "active-bar bar" : "bar"}`} id="Needs_Help" onClick={changeTicketStatus}>Needs Help</li>
+            <li className={`${status == 'Resolved' || status == 'Closed' ? "active-bar bar" : "bar"}`} id="Resolved" onClick={changeTicketStatus}>Resolved</li>
+            <li className={`${status == 'Closed' ? "active-bar bar" : "bar"}`} id="Closed" onClick={changeTicketStatus}>Closed</li>
         </ul>
     </div>
   )

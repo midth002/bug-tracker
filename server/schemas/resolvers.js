@@ -56,13 +56,17 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
             },
-        updateStatus: async  (parent, {_id, status}) => {
+        updateStatus: async (parent, {_id, status}) => {
             return await Ticket.findByIdAndUpdate(
                 _id,
                 {status: status}, 
                 {new: true}
             )
-        }
+        },
+        updateTicketChanges: async (parent,props) => {
+            const result = await Ticket.findOneAndUpdate({_id:props._id}, props, {new: true})
+            return result
+        },
         // addTicketComment: async(parent, {ticketId, userId}) => {
         //    return await Ticket.findOneAndUpdate(
         //         {_id: ticketId},

@@ -3,7 +3,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 
 import React from 'react';
 import ProjectTable from '../../components/projectTable/ProjectTable';
-
+import ProjectModal from '../../components/projectModal/ProjectModal';
 import './projects.scss'
 
 const Projects = () => {
@@ -17,7 +17,7 @@ const Projects = () => {
             <div className="project-header">
             <h4>Projects</h4>
                     <div className='create-new-project-div'>
-                        <button>Create a Project</button>
+                        <ProjectModal />
                     </div>
                     
             </div>

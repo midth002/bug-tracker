@@ -50,11 +50,6 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
     event.preventDefault();
    
     const submitPriority = prioritySelectedOption.value
-    console.log(submitPriority)
-
-    
-
-    console.log(ticketState)
 
     try {
         const { data } = await updateTicket({
@@ -72,8 +67,6 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
     }
 }
 
-  console.log(ticketState);
-  console.log(prioritySelectedOption.value)
    
   return (
     <React.Fragment>

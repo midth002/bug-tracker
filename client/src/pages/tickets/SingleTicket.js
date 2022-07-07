@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
-import Stepper from '../../components/stepper/Stepper';
 import ProgressBar from '../../components/progressBar/ProgressBar';
 import TicketForm from '../../components/ticketForm/TicketForm';
 import Loading from '../../components/loading/Loading';

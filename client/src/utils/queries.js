@@ -11,6 +11,18 @@ query allProjects {
 }
 `;
 
+export const QUERY_ONE_PROJECT = gql`
+query GetOneProject($projectId: ID) {
+  getOneProject(projectId: $projectId) {
+    _id
+    title
+    description
+    type
+    status
+  }
+}
+`;
+
 export const QUERY_USER = gql`
 query GetOneUser($userId: ID) {
   getOneUser(userId: $userId) {

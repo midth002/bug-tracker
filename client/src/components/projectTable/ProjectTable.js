@@ -4,10 +4,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import Loading from '../loading/Loading';
+import { Link } from 'react-router-dom';
 
 
-
- const ProjectTable = () => {
+ const ProjectTable = ({user}) => {
 
 
   const { loading: projectsLoading, data: projectData, error} = useQuery(QUERY_PROJECTS);
@@ -43,6 +43,13 @@ import Loading from '../loading/Loading';
       width: 110,
       editable: false,
     },
+    {
+      field: "Link",
+      renderCell: (cellValues) => {
+        
+        return <Link to={`/${user}/projects/${cellValues.id}`}>Open Project</Link>;
+      }
+    }
  
   ];
 

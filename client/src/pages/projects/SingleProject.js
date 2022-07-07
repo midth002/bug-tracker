@@ -1,36 +1,36 @@
 import React, { useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
-import Stepper from '../../components/stepper/Stepper';
+
 import ProgressBar from '../../components/progressBar/ProgressBar';
-import TicketForm from '../../components/ticketForm/TicketForm';
+import ProjectForm from '../../components/projectForm/ProjectForm';
 import Loading from '../../components/loading/Loading';
 import CommentForm from '../../components/commentForm/CommentForm'
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_ONE_TICKET } from '../../utils/queries';
-import './singleticket.scss';
+import { QUERY_ONE_PROJECT } from '../../utils/queries';
+import './singleProjects.scss';
 
 
-const SingleTicket = () => {
+const SingleProject = () => {
 
     const params = window.location.href;
     const paramArray = params.split('/');
-    const ticketNum = paramArray[5]
+    const projectNum = paramArray[5]
 
 
-        const { loading: ticketLoading, data: ticketData, error } = useQuery(QUERY_ONE_TICKET, {
+        const { loading: projectLoading, data: projectData, error } = useQuery(QUERY_ONE_PROJECT, {
             variables: {
-                ticketId: ticketNum}
+                projectId: projectNum}
         })
 
-        if (ticketLoading) return <Loading />;
-        if (!ticketData) return <p>Not Found</p>;
+        if (projectLoading) return <Loading />;
+        if (!projectData) return <p>Not Found</p>;
 
-      const getTicketInformation = async () => {
-        console.log(ticketData.getOneTicket.priority)
+      const getProjectInformation = async () => {
+        console.log(projectData.getOneProject)
       }
 
-    getTicketInformation();
+    getProjectInformation();
 
 
     return (
@@ -41,22 +41,20 @@ const SingleTicket = () => {
         <Sidebar />
         <div className="ticket">
             <div className="ticket-header">
-                <h4>Ticket # {ticketData.getOneTicket._id}</h4>
+                <h4>Project # {projectData.getOneProject._id}</h4>
             </div>
                 <div className='stepper'>
-                    <ProgressBar 
-                    status={ticketData.getOneTicket.status}
-                    ticketId={ticketData.getOneTicket._id}
-                    />
+                    {/* <ProgressBar 
+                    status={projectData.getOneProject.status}
+                    projectId={projectData.getOneProject._id}
+                    /> */}
                 </div>
                 <div className='ticketForm'>
-                    <TicketForm 
-                    priority={ticketData.getOneTicket.priority} 
-                    description={ ticketData.getOneTicket.description} 
-                    type={ticketData.getOneTicket.type}
-                    created={ticketData.getOneTicket.createdAt}
-                    submitter={ticketData.getOneTicket.submitter[0]._id}
-                    ticketId={ticketData.getOneTicket._id}
+                    <ProjectForm
+                    description={ projectData.getOneProject.description} 
+                    type={projectData.getOneProject.type}
+                    projectId={projectData.getOneProject._id}
+                    title={projectData.getOneProject.title}
                     />
                 </div>
                 <div className='comment-section'>
@@ -68,4 +66,4 @@ const SingleTicket = () => {
       )
 }
 
-export default SingleTicket;
+export default SingleProject;

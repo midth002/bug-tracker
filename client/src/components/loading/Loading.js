@@ -5,8 +5,7 @@ import Sidebar from '../sidebar/Sidebar';
 const Loading = () => {
   return (
     <div>
-        <Navbar />
-        <Sidebar />
+        Loading...
     </div>
   )
 }

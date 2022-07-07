@@ -44,7 +44,10 @@ const SingleTicket = () => {
                 <h4>Ticket # {ticketData.getOneTicket._id}</h4>
             </div>
                 <div className='stepper'>
-                    <ProgressBar status={ticketData.getOneTicket.status}/>
+                    <ProgressBar 
+                    status={ticketData.getOneTicket.status}
+                    ticketId={ticketData.getOneTicket._id}
+                    />
                 </div>
                 <div className='ticketForm'>
                     <TicketForm 

@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+
 const steps = ['New', 'Working', 'Resolved', 'Closed'];
 
 export default function StepperProgress({status}) {

@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import './login.scss';
 import Auth from '../../utils/auth';
 import  { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBug } from '@fortawesome/free-solid-svg-icons'
+import { faBug } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
     const [formState, setFormState] = useState({ 
@@ -50,7 +50,7 @@ const Login = () => {
        
       <Box className="first-box"
       sx={{
-        position: 'fixed',
+        mt: 7,
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
@@ -58,8 +58,8 @@ const Login = () => {
         bgcolor: 'background.paper',
         overflow: 'hidden',
         fontWeight: 'bold',
-        width: 500,
-        height: 400
+        width: 600,
+        height: 500
       }}
     >
     

@@ -27,7 +27,7 @@ const SingleTicket = () => {
         if (!ticketData) return <p>Not Found</p>;
 
       const getTicketInformation = async () => {
-        console.log(ticketData.getOneTicket._id)
+        console.log(ticketData.getOneTicket.priority)
       }
 
     getTicketInformation();

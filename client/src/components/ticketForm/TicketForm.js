@@ -27,23 +27,19 @@ const options = [
   ]
 
 const TicketForm = ({ ticketId, priority, description, type, created, submitter }) => {
+  // const [typeSelectedOption, setTypeSelectedOption] = useState(null);
 
+  const [prioritySelectedOption, setPrioritySelectedOption] = useState(priority);
   const [updateTicket, {error} ] = useMutation(SAVE_TICKET_CHANGES);
   const [ticketState, setTicketState] = useState({
       id: ticketId,
       description,
-      type, 
-      priority
   })
 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // const submitPriority = prioritySelectedOption.value
-    // const submitType = typeSelectedOption.value
     setTicketState({
-        // priority: submitPriority,
-        // type: submitType,
       ...ticketState,
       [name]: value,
     });
@@ -52,11 +48,19 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
 
   const handleTicketChanges = async (event) => {
     event.preventDefault();
-     
+   
+    const submitPriority = prioritySelectedOption.value
+    console.log(submitPriority)
+
+    
+
+    console.log(ticketState)
 
     try {
         const { data } = await updateTicket({
+         
             variables: {
+              priority: submitPriority,
                 ...ticketState
             }
         })
@@ -69,6 +73,7 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
 }
 
   console.log(ticketState);
+  console.log(prioritySelectedOption.value)
    
   return (
     <React.Fragment>
@@ -86,8 +91,9 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
           </Select> */}
 
           <Select
-          placeholder={priority}
           defaultValue={priority}
+          onChange={setPrioritySelectedOption}
+          placeholder={priority}
           options={options}
           />
 

@@ -1,0 +1,32 @@
+.first-container {
+    display: flex;
+    justify-content: center;
+    
+
+    .first-box {
+
+        .login-form {
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 20px 40px;
+            box-shadow: 0 5px 10px 0px rgb(0 0 0 / 10%);
+            -webkit-box-shadow: 0 5px 10px 0px rgb(0 0 0 / 10%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #fafbfc;
+
+            .login-form-title {
+                display: block;
+                font-family: Arial !important;
+                font-size: 28px;
+                padding: 20px;
+                line-height: 1.2;
+                text-align: center; 
+                width: 100%;
+                font-weight: bold;
+            }
+        }
+    }
+}

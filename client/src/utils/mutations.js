@@ -48,3 +48,15 @@ mutation Mutation($submitter: ID!, $title: String!, $priority: String!, $type: S
     _id
   }
 }`;
+
+export const SAVE_TICKET_CHANGES = gql`
+mutation Mutation($id: ID!, $priority: String, $description: String, $type: String) {
+  updateTicketChanges(_id: $id, priority: $priority, description: $description, type: $type) {
+    _id
+    title
+    description
+    priority
+    type
+    status
+  }
+}`; 

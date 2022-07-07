@@ -61,7 +61,7 @@ const TicketModal = ({user}) => {
           ...ticket,
           [name]: value,
         });
-        console.log(ticket)
+    
       };
     
   
@@ -69,7 +69,7 @@ const TicketModal = ({user}) => {
         event.preventDefault();
          const submitPriority = prioritySelectedOption.value
         const submitType = typeSelectedOption.value
-        console.log(ticket)
+ 
         try {
             const { data } = await createTicket({
                 variables: {

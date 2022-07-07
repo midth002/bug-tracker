@@ -15,7 +15,9 @@ import Loading from '../loading/Loading';
 import DescriptionField from '../multilineTextFields/MultilineTextFields';
 import { QUERY_ONE_TICKET } from '../../utils/queries';
 import Select from 'react-select'
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { SAVE_TICKET_CHANGES } from '../../utils/mutations';
+import Button from '@mui/material/Button'
 
 
 const options = [
@@ -24,9 +26,49 @@ const options = [
   {value: 'High', label: 'High' }
   ]
 
-const TicketForm = ({ priority, description, type, created, submitter }) => {
+const TicketForm = ({ ticketId, priority, description, type, created, submitter }) => {
 
-  
+  const [updateTicket, {error} ] = useMutation(SAVE_TICKET_CHANGES);
+  const [ticketState, setTicketState] = useState({
+      id: ticketId,
+      description,
+      type, 
+      priority
+  })
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    // const submitPriority = prioritySelectedOption.value
+    // const submitType = typeSelectedOption.value
+    setTicketState({
+        // priority: submitPriority,
+        // type: submitType,
+      ...ticketState,
+      [name]: value,
+    });
+
+  };
+
+  const handleTicketChanges = async (event) => {
+    event.preventDefault();
+     
+
+    try {
+        const { data } = await updateTicket({
+            variables: {
+                ...ticketState
+            }
+        })
+
+       console.log("Success", data);
+    } catch (e) {
+        console.log("failed")
+        console.error(JSON.stringify(e, null, 2))
+    }
+}
+
+  console.log(ticketState);
    
   return (
     <React.Fragment>
@@ -54,7 +96,13 @@ const TicketForm = ({ priority, description, type, created, submitter }) => {
         </FormControl>
         <div>
           <div><label>Description</label></div>
-          <textarea className="description-text" rows="3" cols="50" defaultValue={description}></textarea>
+          <textarea 
+          className="description-text" 
+          rows="3" cols="50" 
+          name="description" 
+          defaultValue={description}
+          onChange={handleChange}
+          ></textarea>
         </div>
         <div>
           <h5>Submitter</h5>
@@ -68,6 +116,7 @@ const TicketForm = ({ priority, description, type, created, submitter }) => {
           <h5>Date Created</h5>
           <p>{created}</p>
         </div>
+        <Button onClick={handleTicketChanges}>Save Changes</Button>
       </Box>
   
     </Container>

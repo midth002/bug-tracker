@@ -6,7 +6,7 @@ import ProgressBar from '../../components/progressBar/ProgressBar';
 import TicketForm from '../../components/ticketForm/TicketForm';
 import Loading from '../../components/loading/Loading';
 import CommentForm from '../../components/commentForm/CommentForm'
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ONE_TICKET } from '../../utils/queries';
 import './singleticket.scss';
 
@@ -27,7 +27,7 @@ const SingleTicket = () => {
         if (!ticketData) return <p>Not Found</p>;
 
       const getTicketInformation = async () => {
-        console.log(ticketData.getOneTicket)
+        console.log(ticketData.getOneTicket._id)
       }
 
     getTicketInformation();
@@ -41,7 +41,7 @@ const SingleTicket = () => {
         <Sidebar />
         <div className="ticket">
             <div className="ticket-header">
-                <h4>Ticket # {paramArray[5]}</h4>
+                <h4>Ticket # {ticketData.getOneTicket._id}</h4>
             </div>
                 <div className='stepper'>
                     <ProgressBar status={ticketData.getOneTicket.status}/>
@@ -53,6 +53,7 @@ const SingleTicket = () => {
                     type={ticketData.getOneTicket.type}
                     created={ticketData.getOneTicket.createdAt}
                     submitter={ticketData.getOneTicket.submitter[0]._id}
+                    ticketId={ticketData.getOneTicket._id}
                     />
                 </div>
                 <div className='comment-section'>

@@ -11,10 +11,13 @@ query allProjects {
 }
 `;
 
-export const QUERY_USERNAME = gql`
-query getOneUser($username: String!) {
-  getOneUser(username: $username) {
+export const QUERY_USER = gql`
+query GetOneUser($userId: ID) {
+  getOneUser(userId: $userId) {
     username
+    email
+    role
+    _id
   }
 }
 `;

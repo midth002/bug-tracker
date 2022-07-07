@@ -44,23 +44,20 @@ const TicketModal = ({user}) => {
 
     const [createTicket, {error} ] = useMutation(CREATE_TICKET);
     const [ticket, setTicket] = useState({
-        submitter: '',
+        submitter: user,
         title: '',
-        description: '',
-        type: '',
-        priority: ''
+        description: ''
     })
 
 
   
     const handleChange = (event) => {
         const { name, value } = event.target;
-        const submitPriority = prioritySelectedOption.value
-        const submitType = typeSelectedOption.value
+        // const submitPriority = prioritySelectedOption.value
+        // const submitType = typeSelectedOption.value
         setTicket({
-            submitter: user,
-            priority: submitPriority,
-            type: submitType,
+            // priority: submitPriority,
+            // type: submitType,
           ...ticket,
           [name]: value,
         });
@@ -70,12 +67,14 @@ const TicketModal = ({user}) => {
   
     const handleTicketFormSubmit = async (event) => {
         event.preventDefault();
-
+         const submitPriority = prioritySelectedOption.value
+        const submitType = typeSelectedOption.value
         console.log(ticket)
         try {
             const { data } = await createTicket({
                 variables: {
-               
+                   priority: submitPriority,
+                    type: submitType,
                     ...ticket
                 }
             

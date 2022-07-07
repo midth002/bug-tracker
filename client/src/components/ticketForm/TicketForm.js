@@ -115,7 +115,7 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
           <h5>Date Created</h5>
           <p>{created}</p>
         </div>
-        <Button onClick={handleTicketChanges}>Save Changes</Button>
+        <Button onClick={handleTicketChanges} variant="contained">Save Changes</Button>
       </Box>
   
     </Container>

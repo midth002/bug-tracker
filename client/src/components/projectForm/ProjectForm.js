@@ -86,7 +86,7 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
           <h5>Date Created</h5>
           <p>{created}</p>
         </div>
-        <Button onClick={handleProjectChanges}>Save Changes</Button>
+        <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button>
       </Box>
   
     </Container>

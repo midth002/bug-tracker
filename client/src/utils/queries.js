@@ -61,4 +61,16 @@ query GetOneTicket($ticketId: ID) {
     status
     createdAt
   }
-}`
+}`;
+
+export const GET_TICKET_BY_TYPE = gql`
+query GetTicketByType($type: String!) {
+  getTicketByType(type: $type) {
+    title
+    description
+    priority
+    type
+    status
+    _id
+  }
+}`;

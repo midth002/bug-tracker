@@ -14,17 +14,15 @@ const Menu = () => {
                 <a href={`/${paramArray[3]}`}>Dashboard</a>
             </li>
             <li>
-              <a href={`/${paramArray[3]}/users`}>User Roles</a>
-            </li>
-            <li>
                 <a href={`/${paramArray[3]}/projects`}>Projects</a>
             </li>
             <li>
                 <a href={`/${paramArray[3]}/tickets`}>Tickets</a>
             </li>
             <li>
-               <a href={`/${paramArray[3]}/myprojects`}>My Projects</a>
+              <a href={`/${paramArray[3]}/users`}>Admin</a>
             </li>
+           
         </ul>
     </div>
   )

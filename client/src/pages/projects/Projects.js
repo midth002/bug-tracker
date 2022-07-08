@@ -1,6 +1,7 @@
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
-
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container'
 import React from 'react';
 import ProjectTable from '../../components/projectTable/ProjectTable';
 import ProjectModal from '../../components/projectModal/ProjectModal';
@@ -8,22 +9,30 @@ import './projects.scss'
 
 const Projects = () => {
   return (
-    <div className="container">
-        <div className='navbar'>
-            <Navbar />
-        </div>
-        <Sidebar />
-        <div className="projects">
+    <>
+
+    <Container className="container">
+      
+        <Box 
+        className="projects"
+        bgcolor="white"
+        sx={{ 
+          boxShadow: 3,
+          borderRadius: 2, 
+          width: '100%',
+        }}
+        >
             <div className="project-header">
-            <h4>Projects</h4>
+            <h5>Projects</h5>
                     <div className='create-new-project-div'>
                         <ProjectModal />
                     </div>
                     
             </div>
         <ProjectTable />
-        </div>
-    </div>
+        </Box>
+    </Container>
+    </>
   )
 }
 

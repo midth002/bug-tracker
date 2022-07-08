@@ -5,7 +5,9 @@ import { useQuery } from "@apollo/client";
 import { QUERY_PROJECTS } from "../../utils/queries";
 import Loading from '../loading/Loading';
 import { Link } from 'react-router-dom';
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
 
  const ProjectTable = ({user}) => {
 
@@ -18,36 +20,48 @@ import { Link } from 'react-router-dom';
   const getProjects = async () => {
     const projects = await projectData?.allProjects || [];
     setTableData(projects);
-    return console.log(typeof projects);
+    console.log(projects.length);
   }
 
   getProjects();
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 250 },
+    { field: '_id', 
+    headerName: 'ID',  
+    
+    headerClassName: 'header-style', 
+    width: 100 },
     {
       field: 'title',
       headerName: 'Project Name',
-      width: 200,
+   
+      headerClassName: 'header-style',
+      width: 250,
       editable: false,
     },
     {
       field: 'description',
       headerName: 'Description',
-      width: 350,
+     
+      headerClassName: 'header-style',
+      width: 500,
       editable: false,
     },
     {
-      field: 'status',
-      headerName: 'Status',
-      width: 110,
-      editable: false,
-    },
-    {
-      field: "Link",
-      renderCell: (cellValues) => {
+      field: "edit",
+      headerName: "Edit",
+     
+      headerClassName: 'header-style',
+      sortable: false,
+      width: 130,
+      disableClickEventBubbling: true,
+      renderCell: () => {
         
-        return <Link to={`/${user}/projects/${cellValues.id}`}>Open Project</Link>;
+        return (
+          <Button variant="contained" color="primary" startIcon={<EditIcon />} style={{maxWidth: '100px', maxHeight: '25px', minWidth: '30px', minHeight: '20px', fontSize: '12px'}}>
+          Edit
+        </Button>
+        );
       }
     }
  
@@ -58,15 +72,24 @@ import { Link } from 'react-router-dom';
  
    
     return (
-      <div className="project-table" style={{ height: 400, width: '100%' }}>
+      <Box 
+      className="project-table" 
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      style={{ height: 200, width: '100%' }}
+      >
+     
         <DataGrid
           rows={tableData}
           getRowId={row => row._id}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          rowHeight={30}
+          headerHeight={25}
         />
-      </div>
+      </Box>
     );
   }
 

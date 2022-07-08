@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../../utils/mutations';
+import { CREATE_USER, LOGIN_USER } from '../../utils/mutations';
 import  { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faUserGear, faUserAstronaut, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 import Dashboard from '../dashboard/Dashboard';
@@ -19,6 +19,7 @@ const Signup = () => {
         password: '',
       });
       const [createUser, { error, data }] = useMutation(CREATE_USER);
+      const [ login, {data:loginData}] = useMutation(LOGIN_USER);
       // update state based on form input changes
       const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,15 +43,29 @@ const Signup = () => {
       event.preventDefault();
       console.log(formState);
       try {
-        const { data } = await createUser({
+        const mutationResponse= await createUser({
           variables: {
             role,
             ...formState },
         });
-        console.log(data);
-        Auth.login(data.createUser.token, data.addUser.user.username);
+        console.log(mutationResponse.data.createUser.token);
+        // Auth.login(data.createUser.token, data.addUser.user.username);
       } catch (e) {
         console.error(e);
+      }
+
+      try {
+        console.log(formState.email, formState.password, formState.username)
+          const { data: loginData } = await login({
+            variables: {
+              username: formState.username,
+              password: formState.password,
+            }
+          })
+
+          Auth.login(loginData.login.token, formState.username )
+      } catch (err) {
+        console.log(err)
       }
   
     };

@@ -8,16 +8,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from 'react-select';
 import { CREATE_PROJECT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: 2,
     p: 4,
   };
 
@@ -82,7 +83,7 @@ const ProjectModal = () => {
 
   return (
     <div>
-    <div><Button onClick={handleOpen} >Create a Project</Button></div>
+    <div><Button onClick={handleOpen} style={{maxWidth: '200px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', fontSize: '12px'}}>Create a Project</Button></div>
     <Modal
         open={showModal}
         onClose={handleClose}
@@ -94,8 +95,19 @@ const ProjectModal = () => {
             New Project
           </Typography>
             <form onSubmit={handleProjectFormSubmit}>
-            <TextField id="filled-basic" label="Title" name="title" value={projectInputs.title} variant="standard" onChange={handleChange}/>
-            <TextField id="filled-basic" label="Description" name="description" value={projectInputs.description} onChange={handleChange} variant="standard" />
+            <TextField id="filled-basic" label="Title" name="title" value={projectInputs.title} variant="outlined" onChange={handleChange} size="small" sx={{my:2, width: '100%'}} />
+            <TextField 
+            id="filled-basic" 
+            name="description"
+            label="Project Description"
+            value={projectInputs.description} 
+            onChange={handleChange} 
+            variant="outlined"
+            sx={{my:2, width: '100%'}}
+            multiline
+            minRows={6}
+            maxRows={6}
+            />
             <Select
          defaultValue={typeSelectedOption}
           onChange={setTypeSelectedOption}
@@ -104,7 +116,7 @@ const ProjectModal = () => {
         
           />
 
-            <Button type="submit">Create Project</Button>
+            <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>
             </form>
           
           

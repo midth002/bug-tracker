@@ -17,7 +17,7 @@ import Login from './pages/login/Login';
 import Tickets from './pages/tickets/Tickets';
 import SingleTicket from './pages/tickets/SingleTicket';
 import LandingPage from './pages/landing/Landing';
-
+import ProjectView from './pages/projectView/ProjectView';
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -47,8 +47,8 @@ function App() {
     <Router>
     <Routes> 
       <Route path='/' element={<LandingPage />} />
-      <Route path='/:username' element={<Dashboard />} />
-      <Route path='/:username/projects' element={<Projects />} />
+      <Route path='/:username' element={<Dashboard/>} />
+      <Route path='/:username/projects' element={<ProjectView />} />
       <Route path='/:username/projects/:projectId' element={<SingleProjects />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />

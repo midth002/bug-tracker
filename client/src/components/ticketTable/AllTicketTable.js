@@ -11,28 +11,28 @@ import TicketModal from '../ticketModal/TicketModal';
 import Grid from '@mui/material/Grid'
 import './ticketTable.scss'
 
-const AllTicketTable = ({user}) => {
+const AllTicketTable = ({user, ticket}) => {
 
-    const { loading: ticketsLoading, data: ticketsData, error} = useQuery(QUERY_TICKETS);
-    const [tableData, setTableData] = useState([])
+  //   const { loading: ticketsLoading, data: ticketsData, error} = useQuery(QUERY_TICKETS);
+  //   const [tableData, setTableData] = useState([])
 
-    if (ticketsLoading) return <Loading />;
-    if (!ticketsData) return <p>Not Found</p>;
-    const getTickets = async () => {
-        const tickets = await ticketsData?.allTickets || [];
-        setTableData(tickets);
-    }
+  //   if (ticketsLoading) return <Loading />;
+  //   if (!ticketsData) return <p>Not Found</p>;
+  //   const getTickets = async () => {
+  //       const tickets = await ticketsData?.allTickets || [];
+  //       setTableData(tickets);
+  //   }
 
-    getTickets();
+  //   getTickets();
 
-  const handleClick = (event, value) => {
-    console.log(event, value);
-  }
+  // const handleClick = (event, value) => {
+  //   console.log(event, value);
+  // }
  
   
 
     const columns = [
-        { field: '_id', headerName: 'ID', 
+        { field: '_id', headerName: 'ID', hide: true,  
         renderCell: (cellValues) => {
               
           return <Link to={`/${user}/tickets/${cellValues.id}`}>{cellValues.id}</Link>;
@@ -44,6 +44,7 @@ const AllTicketTable = ({user}) => {
           headerName: 'Ticket Name',
           width: 200,
           editable: false,
+          
         },
         {
           field: 'description',
@@ -54,13 +55,13 @@ const AllTicketTable = ({user}) => {
         {
           field: 'priority',
           headerName: 'Priority',
-          width: 100,
+          width: 80,
           editable: false,
         },
         {
           field: 'status',
           headerName: 'status',
-          width: 100,
+          width: 80,
           editable: false,
         }
       ];
@@ -79,20 +80,17 @@ const AllTicketTable = ({user}) => {
       sx={{
           boxShadow: 3,
           borderRadius: 2, 
-          width: '90%',
-          height: 450,
-          ml: 20,
-          mr: 3,
-          mt: 8,
-          flexWrap: 'wrap'
+          width: '100%',
+          flexWrap: 'wrap',
+          height: 325
       }}            
       >
 
     
 
       <div className="ticket-header">
-      <h5>All Tickets</h5>
-        <TicketModal />
+      <h5>Tickets</h5>
+        <TicketModal user={user}/>
         </div>
     
         <Box 
@@ -100,16 +98,17 @@ const AllTicketTable = ({user}) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      style={{ height: 375, width: '100%' }}
+      style={{ width: '100%'}}
       >
     <DataGrid
-      rows={tableData}
+      rows={ticket}
       getRowId={row => row._id}
       columns={columns}
-      pageSize={10}
+      pageSize={5}
       rowsPerPageOptions={[5]}
       rowHeight={45}
       headerHeight={30}
+      sx={{border: 'none', height: 250}}
     />
     </Box>
     </Box>

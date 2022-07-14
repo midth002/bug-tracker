@@ -10,7 +10,7 @@ import './projects.scss'
 const Projects = () => {
   return (
     <>
-
+      
     <Container className="container">
       
         <Box 

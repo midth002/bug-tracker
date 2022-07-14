@@ -13,6 +13,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Auth from '../../utils/auth';
 import { Container } from '@mui/system';
+import { QUERY_TICKETS} from "../../utils/queries";
+
 
 const Tickets = () => {
 
@@ -22,17 +24,26 @@ const Tickets = () => {
   const paramArray = params.split('/');
   const user = paramArray[3]
 
-  const { loading: userNameLoading, data: userNameData, error } 
-  = useQuery(QUERY_USER, 
-     { variables: {
-        userId: user
-      }
-  })
+  const {loading: ticketsLoading, data: ticketData, error: ticketError} = 
+  useQuery(QUERY_TICKETS)
 
-  if (userNameLoading) return <Loading />;
-  if (!userNameData) return <p>User Name Not Found</p>
 
-  // console.log(userNameData.getOneUser._id);
+  const [tableData, setTableData] = useState([])
+
+
+
+  if (ticketsLoading) return <Loading />;
+ if (!ticketData) return <p>Not Found</p>;
+  
+  const getTickets = async () => {
+    const tickets = await ticketData?.allTickets || [];
+    setTableData(tickets);
+}
+
+  getTickets();
+  console.log(tableData)
+
+ 
 
   return (
 
@@ -41,7 +52,9 @@ const Tickets = () => {
   <Box sx={{ display: 'flex', flexGrow: 1, flexwrap: 'wrap', justifyContent: 'center'}}>
       <Sidebar />
       <Jumbotron title={title} />
-              <AllTicketTable user={user}/>
+              <Box sx={{width: '80%', ml: 15, mt: 10}}>
+                  <AllTicketTable ticket={tableData} user={user}/>
+              </Box>
 
   </Box>
 ) : (

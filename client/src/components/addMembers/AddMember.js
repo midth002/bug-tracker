@@ -16,7 +16,7 @@ const AddMember = ({member}) => {
         {
             field: 'username', 
             headerName: 'Name',
-            width: 150,
+            width: 125,
             editable: false,
         }, 
         {
@@ -41,10 +41,10 @@ const AddMember = ({member}) => {
       sx={{
           boxShadow: 3,
           borderRadius: 2, 
-          width: '30%',
-          height: 250,
-          ml: 20,
-          mt: 2,
+          width: '100%',
+          height: 150,
+          padding: 1,
+          
           flexWrap: 'wrap'
       }}   
         >
@@ -53,7 +53,8 @@ const AddMember = ({member}) => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'top',
-        ml: 2
+      
+        height: 45
         
         }}>
         <h5>Team </h5>
@@ -63,7 +64,6 @@ const AddMember = ({member}) => {
     <Box 
     sx={{
         width: '100%',
-        height: 185,
     }}
     >
     <DataGrid
@@ -76,6 +76,7 @@ const AddMember = ({member}) => {
           headerHeight={20}
           sx = {{
             border: 0,
+            height: 125
           }}
         />
     </Box>

@@ -49,7 +49,7 @@ function App() {
       <Route path='/' element={<LandingPage />} />
       <Route path='/:username' element={<Dashboard/>} />
       <Route path='/:username/projects' element={<ProjectView />} />
-      <Route path='/:username/projects/:projectId' element={<SingleProjects />} />
+      <Route path='/projects/:projectId' element={<SingleProjects />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
       <Route path='/:username/tickets' element={<Tickets />} />

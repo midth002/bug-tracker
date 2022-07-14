@@ -32,7 +32,7 @@ import EditIcon from '@mui/icons-material/Edit';
     headerClassName: 'header-style', 
     renderCell: (cellValues) => {
               
-      return <Link to={`/${user}/projects/${cellValues.id}`}>{cellValues.id}</Link>;
+      return <Link to={`/projects/${cellValues.id}`}>{cellValues.id}</Link>;
     }
     ,width: 100 },
     {

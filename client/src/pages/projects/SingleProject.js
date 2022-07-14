@@ -11,15 +11,15 @@ import { QUERY_ONE_PROJECT } from '../../utils/queries';
 import './singleProjects.scss';
 import Comments from '../../components/comments/Comments';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
-import { Box } from '@mui/material';
+import { Box, Grid} from '@mui/material';
 import AddMember from '../../components/addMembers/AddMember';
-
+import AllTicketTable from '../../components/ticketTable/AllTicketTable';
 const SingleProject = () => {
 
     const params = window.location.href;
     const paramArray = params.split('/');
-    const projectNum = paramArray[5]
-
+    const projectNum = paramArray[4]
+  
 
         const { loading: projectLoading, data: projectData, error } = useQuery(QUERY_ONE_PROJECT, {
             variables: {
@@ -30,10 +30,10 @@ const SingleProject = () => {
         if (!projectData) return <p>Not Found</p>;
 
       const getProjectInformation = async () => {
-        console.log(projectData.getOneProject.members)
+        console.log(projectData.getOneProject.ticketId)
       }
 
-    // getProjectInformation();
+    getProjectInformation();
 
     const title = projectData.getOneProject.title
 
@@ -42,23 +42,35 @@ const SingleProject = () => {
 
         <Sidebar />
         <Jumbotron title={title}/>
-        <Box 
+        <Grid container spacing={1}
         className="ticket" 
-        sx={{ display: 'flex', 
-        flexGrow: 1, 
-        flexwrap: 'wrap'}}
-
+        sx={{ml: 14,
+            mt: 7
+        }}
         >
-                <div className='ticketForm'>
+      
+               <Grid item xs={4}>
+              
+               
                     <ProjectForm
-                    description={ projectData.getOneProject.description} 
+                    description={projectData.getOneProject.description} 
                     type={projectData.getOneProject.type}
                     projectId={projectData.getOneProject._id}
                     />
-                </div>
+              </Grid>
+              
+              <Grid item xs={4}><AddMember member={projectData.getOneProject.members}/></Grid>
+          
                 
-            </Box>
-            <AddMember member={projectData.getOneProject.members}/>
+               <Grid item xs={10}>
+               <AllTicketTable ticket={projectData.getOneProject.ticketId}/>
+               </Grid> 
+
+              
+              
+            </Grid>
+            
+            
         </div>
       )
 }

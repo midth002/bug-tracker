@@ -20,7 +20,6 @@ import Button from '@mui/material/Button'
 import './projectForm.scss';
 
 
-
 const ProjectForm = ({ projectId, title, description, type, created }) => {
   // const [typeSelectedOption, setTypeSelectedOption] = useState(null);
 
@@ -62,23 +61,25 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
 
    
   return (
-    <React.Fragment>
-    <CssBaseline />
-    <Container maxWidth="lg">
+    
       <Box sx={{ 
         bgcolor: 'white',
          boxShadow: 3,
         borderRadius: 2,
-        width: '30%', 
-        padding: 5,
-        ml: 10
+        width: '100%',
+        padding: 2,
+        height: 150,
+        
+        display: 'flex', 
+        justifyContent: 'center',
+        flexWrap: 'wrap'
             }} 
-      component='form'>
+     >
         <div>
           
           <textarea 
           className="description-text" 
-          rows="3" cols="50" 
+          rows="3" cols="30" 
           name="description" 
           defaultValue={description}
           onChange={handleChange}
@@ -93,10 +94,10 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
         <div><p>{created}</p></div>
         </div>
         {/* <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button> */}
+
+      
       </Box>
   
-    </Container>
-  </React.Fragment>
   )
 }
 

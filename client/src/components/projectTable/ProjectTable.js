@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
   const getProjects = async () => {
     const projects = await projectData?.allProjects || [];
     setTableData(projects);
-    console.log(projects.length);
+    console.log(projects);
   }
 
   getProjects();

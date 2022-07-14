@@ -20,7 +20,7 @@ const resolvers = {
             return await Ticket.findOne({_id: ticketId}).populate(["submitter"])
         }, 
         getOneProject: async (parent, {projectId}) => {
-            return await Project.findOne({_id: projectId})
+            return await Project.findOne({_id: projectId}).populate(["ticketId", "members"])
         },
         getOneUser: async (parent, {userId}) => {
             return await User.findOne({userId})

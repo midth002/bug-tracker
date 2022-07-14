@@ -30,10 +30,10 @@ const SingleProject = () => {
         if (!projectData) return <p>Not Found</p>;
 
       const getProjectInformation = async () => {
-        console.log(projectData.getOneProject)
+        console.log(projectData.getOneProject.members)
       }
 
-    getProjectInformation();
+    // getProjectInformation();
 
     const title = projectData.getOneProject.title
 
@@ -58,7 +58,7 @@ const SingleProject = () => {
                 </div>
                 
             </Box>
-            <AddMember />
+            <AddMember member={projectData.getOneProject.members}/>
         </div>
       )
 }

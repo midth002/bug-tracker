@@ -18,6 +18,17 @@ query GetOneProject($projectId: ID) {
     title
     description
     type
+    ticketId {
+      title
+      _id
+      description
+    }
+    members {
+      _id
+      username
+      email
+      role
+    }
     status
   }
 }

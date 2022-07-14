@@ -9,7 +9,10 @@ import CommentForm from '../../components/commentForm/CommentForm'
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ONE_PROJECT } from '../../utils/queries';
 import './singleProjects.scss';
-
+import Comments from '../../components/comments/Comments';
+import Jumbotron from '../../components/jumbotron/Jumbotron';
+import { Box } from '@mui/material';
+import AddMember from '../../components/addMembers/AddMember';
 
 const SingleProject = () => {
 
@@ -32,36 +35,30 @@ const SingleProject = () => {
 
     getProjectInformation();
 
+    const title = projectData.getOneProject.title
 
     return (
         <div className="container">
-        <div className='navbar'>
-            <Navbar />
-        </div>
+
         <Sidebar />
-        <div className="ticket">
-            <div className="ticket-header">
-                <h4>Project # {projectData.getOneProject._id}</h4>
-            </div>
-                <div className='stepper'>
-                    {/* <ProgressBar 
-                    status={projectData.getOneProject.status}
-                    projectId={projectData.getOneProject._id}
-                    /> */}
-                </div>
+        <Jumbotron title={title}/>
+        <Box 
+        className="ticket" 
+        sx={{ display: 'flex', 
+        flexGrow: 1, 
+        flexwrap: 'wrap'}}
+
+        >
                 <div className='ticketForm'>
                     <ProjectForm
                     description={ projectData.getOneProject.description} 
                     type={projectData.getOneProject.type}
                     projectId={projectData.getOneProject._id}
-                    title={projectData.getOneProject.title}
                     />
                 </div>
-                <div className='comment-section'>
-                <CommentForm />
-                </div>
-            </div>
-        
+                
+            </Box>
+            <AddMember />
         </div>
       )
 }

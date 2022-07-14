@@ -17,7 +17,7 @@ import Select from 'react-select'
 import { useQuery, useMutation } from "@apollo/client";
 import { SAVE_TICKET_CHANGES } from '../../utils/mutations';
 import Button from '@mui/material/Button'
-
+import './projectForm.scss';
 
 
 
@@ -65,11 +65,17 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
     <React.Fragment>
     <CssBaseline />
     <Container maxWidth="lg">
-      <Box sx={{ bgcolor: 'white', height: '60vh' }} component='form'>
+      <Box sx={{ 
+        bgcolor: 'white',
+         boxShadow: 3,
+        borderRadius: 2,
+        width: '30%', 
+        padding: 5,
+        ml: 10
+            }} 
+      component='form'>
         <div>
-          <div><label>Title</label></div>
-          <div><input value={title}></input></div>
-          <div><label>Description</label></div>
+          
           <textarea 
           className="description-text" 
           rows="3" cols="50" 
@@ -79,14 +85,14 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
           ></textarea>
         </div>
         <div>
-          <h5>Type</h5>
-          <p>{type}</p>
+        <label>Type of Project</label>
+            <div className="div-value"><p>{type}</p></div>
         </div>
         <div>
-          <h5>Date Created</h5>
-          <p>{created}</p>
+        <label>Created At</label>
+        <div><p>{created}</p></div>
         </div>
-        <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button>
+        {/* <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button> */}
       </Box>
   
     </Container>

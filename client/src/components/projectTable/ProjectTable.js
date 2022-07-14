@@ -30,7 +30,11 @@ import EditIcon from '@mui/icons-material/Edit';
     headerName: 'ID',  
     
     headerClassName: 'header-style', 
-    width: 100 },
+    renderCell: (cellValues) => {
+              
+      return <Link to={`/${user}/projects/${cellValues.id}`}>{cellValues.id}</Link>;
+    }
+    ,width: 100 },
     {
       field: 'title',
       headerName: 'Project Name',

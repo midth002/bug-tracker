@@ -69,9 +69,7 @@ const ProjectModal = () => {
                 variables: {
                     type: submitType,
                     ...projectInputs
-                }
-            
-                
+                }  
             })
 
            console.log("Success", data);

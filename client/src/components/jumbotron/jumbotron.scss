@@ -1,9 +1,20 @@
 .jumbo {
-    background-color: #538dd7;
+    // background-color: #538dd7;
+    background: linear-gradient(110deg, #7D70BA 60%, #DEC1FF 60%);
     height: 20vh;
     z-index: -2;
     position: fixed;
     width: 100%;
-    left: 10.7%;
+
+
+
+    .jumbo-title {
+        width: 50%;
+        padding-left: 15%;
+
+        h3 {
+            color: white;
+        }
+    }
     
 }

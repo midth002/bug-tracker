@@ -1,22 +1,29 @@
+.bar-div {
+    display: flex;
+    width: 100%;
+    padding: 0 50px;
 
-.bar-container {
-    display: inline!important;
-    list-style: none;
-
-    .bar {
-        background-color: #1976d2;
-        width: 18%;
-        display: inline-block;
-        text-align: center;
-        border: 1px solid white;
-        color: white;
-        height: 30px;
-        
-         
-        
-    }
-
-    .active-bar {
-        background-color: green;
+    .bar-container {
+        display: flex;
+        list-style: none;
+        width: 100%;
+        padding: 0;
+    
+        .bar {
+            background-color: #1976d2;
+            width: 50%;
+            display: inline-block;
+            text-align: center;
+            border: 1px solid white;
+            color: white;
+            height: 30px;
+            
+        }
+    
+        .active-bar {
+            background-color: green;
+        }
     }
 }
+
+

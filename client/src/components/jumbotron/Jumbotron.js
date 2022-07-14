@@ -4,7 +4,7 @@ import './jumbotron.scss'
 const Jumbotron = ({title, id}) => {
   return (
     <div className="jumbo">
-        <h3>{title}</h3>
+        <div className='jumbo-title'><h3>{title}</h3></div>
     </div>
   )
 }

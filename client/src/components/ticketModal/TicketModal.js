@@ -14,11 +14,13 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: 500,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: 2,
     p: 4,
+    height: 'auto'
+   
   };
 
   const options = [
@@ -90,7 +92,7 @@ const TicketModal = ({user}) => {
 
   return (
     <div>
-    <div><Button onClick={handleOpen} >Create Ticket</Button></div>
+    <div><Button onClick={handleOpen} color="success" variant="contained" style={{maxWidth: '200px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', fontSize: '12px'}}>Create Ticket</Button></div>
     <Modal
         open={showModal}
         onClose={handleClose}
@@ -102,13 +104,25 @@ const TicketModal = ({user}) => {
             New Ticket
           </Typography>
             <form onSubmit={handleTicketFormSubmit}>
-            <TextField id="filled-basic" label="Title" name="title" value={ticket.title} variant="standard" onChange={handleChange}/>
-            <TextField id="filled-basic" label="Description" name="description" value={ticket.description} onChange={handleChange} variant="standard" />
+            <TextField id="filled-basic" label="Title" name="title" value={ticket.title} variant="outlined" onChange={handleChange} size="small" sx={{my:2, width: '100%'}}/>
+            <TextField  
+            id="filled-basic" 
+            name="description"
+            label="Project Description"
+            value={ticket.description} 
+            onChange={handleChange} 
+            variant="outlined"
+            sx={{my:2, width: '100%'}}
+            multiline
+            minRows={6}
+            maxRows={6} />
             <Select
          defaultValue={typeSelectedOption}
           onChange={setTypeSelectedOption}
           placeholder="Type"
           options={typeOptions}
+         
+       
         
           />
             <Select
@@ -116,10 +130,11 @@ const TicketModal = ({user}) => {
           onChange={setPrioritySelectedOption}
           placeholder="Priority"
           options={options}
+          sx={{mt: 2}}
          
           />
 
-            <Button type="submit">Create Ticket</Button>
+            <Button type="submit" color="success" variant="contained" sx={{mt:2}}>Create Ticket</Button>
             </form>
           
           

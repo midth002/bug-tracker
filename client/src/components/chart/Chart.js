@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, Sector} from 'recharts';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { QUERY_TICKETS, QUERY_PROJECTS } from '../../utils/queries';
@@ -7,6 +7,8 @@ import { useQuery } from '@apollo/client';
 import Loading from '../loading/Loading';
 
 const Chart = () => {
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
   const { loading: ticketsLoading, data: ticketsData, error: ticketError} = useQuery(QUERY_TICKETS);
   const { loading: projectsLoading, data: projectData, error: projectError} = useQuery(QUERY_PROJECTS);
@@ -36,30 +38,41 @@ const Chart = () => {
         const projects = projectData?.allProjects || [];
         
    
-    
+
 
 
       const priorityData = [
-        {name: 'Low', uv: lowPriority.length},
-         {name: 'Medium', uv: medPriority.length}, 
-         {name: 'High', uv: highPriority.length}]
+        {name: 'Low', value: lowPriority.length, fill: '#0088FE'},
+         {name: 'Medium', value: medPriority.length, fill: '#00C49F'}, 
+         {name: 'High', value: highPriority.length, fill: '#FFBB28'}]
 
          const typeData = [
-          {name: 'Bug', uv: bug.length},
-          {name: 'Story', uv: story.length}, 
-          {name: 'Task', uv: task.length},
-          {name: 'Subtask', uv: subtask.length},
+          {name: 'Bug', value: bug.length, fill: '#003f5c'},
+          {name: 'Story', value: story.length, fill: '#7a5195'}, 
+          {name: 'Task', value: task.length, fill: '#ef5675'},
+          {name: 'Subtask', value: subtask.length, fill: '#ffa600'},
          ]
 
          const statusData = [
-          {name: 'New', uv: newTicket.length},
-          {name: 'Working', uv: working.length}, 
-          {name: 'Needs Help', uv: requiresHelp.length},
-          {name: 'Resolved', uv: resolved.length},
-          {name: 'Closed', uv: completed.length},
+          {name: 'New', value: newTicket.length, fill: '#488f31'},
+          {name: 'Working', value: working.length, fill: '#8cbcac'}, 
+          {name: 'Needs Help', value: requiresHelp.length, fill: '#de425b'},
+          {name: 'Resolved', value: resolved.length, fill: '#ec9c9d' }
          ]
 
 
+         const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 
 
@@ -67,78 +80,109 @@ const Chart = () => {
 
 
   return (
-    <Box  sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', width: '100%', mt:5}} >
-     <Grid container xs={7} spacing={0}>
-       <Grid item xs={11}>
+    <Box  sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', width: '95%', mt:2}} >
+      
+     <Grid container xs={12} spacing={0}>
+       <Grid item xs={4} align='center' justify='center'>
             <Box 
             bgcolor='white'
             sx={{ 
                 boxShadow: 3,
                 borderRadius: 2, 
-                width: '95%',
+                width: '97%',
                 display: 'flex',
                 m:1
               }}
           >
-          <div><h5>Priority</h5></div>
-        <BarChart width={500} height={170} data={priorityData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Tooltip />
-          <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-          <Bar dataKey="uv" fill="#8884d8" barSize={50} />
-        </BarChart>
+           {/* <div><h4>Tickets By Priority</h4></div> */}
+        
+     
+      
+       <PieChart width={350} height={200}>
+       <Legend layout="horizontal" verticalAlign="top" align="top" />
+  <Pie 
+    data={priorityData} 
+    dataKey="value" 
+    nameKey="name" 
+    cx="50%" 
+    cy="50%" 
+    outerRadius={70} 
+    labelLine={false}
+    label={renderCustomizedLabel}
+    />
+</PieChart>
+
           </Box>
        </Grid>
-       <Grid item xs={11}>   
+       <Grid item xs={4}>   
           <Box 
             bgcolor='white'
             sx={{ 
                 boxShadow: 3,
                 borderRadius: 2, 
-                width: '95%',
+                width: '97%',
                 display: 'flex',
                 m:1
               }}
           >
-          <div><h5>Type</h5></div>
-        <BarChart width={500} height={170} data={typeData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Tooltip />
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="uv" fill="#8884d8" barSize={50} />
-        </BarChart>
+          {/* <div><h4>Tickets By Type</h4></div> */}
+      
+
+        <PieChart width={350} height={200}>
+       <Legend layout="horizontal" verticalAlign="top" align="center" />
+  <Pie 
+    data={typeData} 
+    dataKey="value" 
+    nameKey="name" 
+    cx="50%" 
+    cy="50%" 
+    outerRadius={70} 
+    labelLine={false}
+    label={renderCustomizedLabel}
+    />
+</PieChart>
           </Box>
        </Grid>
        
      
    
     
-       <Grid item xs={11}>
+       <Grid item xs={4}>
             <Box 
             bgcolor='white'
             sx={{ 
                 boxShadow: 3,
                 borderRadius: 2, 
-                width: '95%',
+                width: '97%',
                 display: 'flex',
                 m:1
               }}
           >
-          <div><h4>Status</h4></div>
-        <BarChart width={500} height={170} data={statusData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Tooltip />
-          <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-          <Bar dataKey="uv" fill="#8884d8" barSize={50} />
-        </BarChart>
+          
+          {/* <div><h4>Tickets By Status</h4></div> */}
+
+        <PieChart width={350} height={200} >
+       <Legend layout="horizontal" verticalAlign="top" align="top" />
+  <Pie 
+    data={statusData} 
+    dataKey="value" 
+    nameKey="name" 
+    cx="50%" 
+    cy="50%" 
+    outerRadius={70} 
+    labelLine={false}
+    label={renderCustomizedLabel}
+    />
+</PieChart>
           </Box>
        </Grid>
 
+
+              
+    
        
       </Grid>
+     
     </Box>
     
   )

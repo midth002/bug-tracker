@@ -42,6 +42,7 @@ type Query {
     getOneProject(projectId: ID): Project!
     allUsers: [User]!
     getOneUser(userId: ID): User!
+    getTicketByType(type: String!): [Ticket]
 }
 
 type Mutation {

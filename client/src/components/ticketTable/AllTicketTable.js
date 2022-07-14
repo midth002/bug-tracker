@@ -6,6 +6,10 @@ import Loading from '../loading/Loading';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Box from '@mui/material/Box';
+import TicketModal from '../ticketModal/TicketModal';
+import Grid from '@mui/material/Grid'
+import './ticketTable.scss'
 
 const AllTicketTable = ({user}) => {
 
@@ -28,7 +32,13 @@ const AllTicketTable = ({user}) => {
   
 
     const columns = [
-        { field: '_id', headerName: 'ID', width: 200 },
+        { field: '_id', headerName: 'ID', 
+        renderCell: (cellValues) => {
+              
+          return <Link to={`/${user}/tickets/${cellValues.id}`}>{cellValues.id}</Link>;
+        },
+        
+        width: 200 },
         {
           field: 'title',
           headerName: 'Ticket Name',
@@ -52,14 +62,7 @@ const AllTicketTable = ({user}) => {
           headerName: 'status',
           width: 100,
           editable: false,
-        },
-        {
-            field: "Link",
-            renderCell: (cellValues) => {
-              
-              return <Link to={`/${user}/tickets/${cellValues.id}`}>Open Ticket</Link>;
-            }
-          }
+        }
       ];
     
 
@@ -68,15 +71,48 @@ const AllTicketTable = ({user}) => {
 
 
   return (
-    <div className="ticket-table" style={{ height: 400, width: '100%' }}>
+    <Box className="ticket-table" 
+     display="flex"
+      justifyContent="center"
+      alignItems="center"
+      bgcolor="white"
+      sx={{
+          boxShadow: 3,
+          borderRadius: 2, 
+          width: '90%',
+          height: 450,
+          ml: 20,
+          mr: 3,
+          mt: 8,
+          flexWrap: 'wrap'
+      }}            
+      >
+
+    
+
+      <div className="ticket-header">
+      <h5>All Tickets</h5>
+        <TicketModal />
+        </div>
+    
+        <Box 
+      className="project-table" 
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      style={{ height: 375, width: '100%' }}
+      >
     <DataGrid
       rows={tableData}
       getRowId={row => row._id}
       columns={columns}
-      pageSize={5}
+      pageSize={10}
       rowsPerPageOptions={[5]}
+      rowHeight={45}
+      headerHeight={30}
     />
-    </div>
+    </Box>
+    </Box>
   )
 }
 

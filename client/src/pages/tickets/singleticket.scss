@@ -3,21 +3,16 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 80%;
-    .ticket-header {
-        text-align: center;
-        width: 35%;
-        height: 5px;
-    }
+    width: 70%;
+ 
     .stepper {
         padding-top: 10px;
-        width: 60%;
-        justify-content: center;
+        width: 100%;
+        display: flex;
     }
 
     .ticketForm {
-        width: 60%;
-        float: left;
+        width: 100%;
     }
 }
 

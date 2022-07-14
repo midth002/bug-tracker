@@ -34,7 +34,7 @@ const ProgressBar = ({status, ticketId}) => {
     
 
   return (
-    <div>
+    <div className="bar-div">
         <ul className="bar-container">
             <li className="active-bar bar" id="New" onClick={changeTicketStatus} value="New">New</li>
             <li className={`${status === 'Working' || status == 'Needs_Help' || status == 'Resolved' || status == 'Closed' ? "active-bar bar" : "bar"}`} id="Working" onClick={changeTicketStatus} value="Working">Working</li>

@@ -9,7 +9,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_USER, LOGIN_USER } from '../../utils/mutations';
 import  { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faUserGear, faUserAstronaut, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
-import Dashboard from '../projectView/ProjectView';
+import Dashboard from '../dashboard/Dashboard';
 import './signup.scss';
 const Signup = () => {
     const [role, setRole] = useState('');

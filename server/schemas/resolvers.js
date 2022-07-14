@@ -12,9 +12,12 @@ const resolvers = {
         }, 
         allUsers: async () => {
             return await User.find({});
-        }, 
+        },
+        getTicketByType: async (parent, {type}) => {
+          return await Ticket.find({type: type})
+        },
         getOneTicket: async (parent, {ticketId}) => {
-            return await Ticket.findOne({_id: ticketId})
+            return await Ticket.findOne({_id: ticketId}).populate(["submitter"])
         }, 
         getOneProject: async (parent, {projectId}) => {
             return await Project.findOne({_id: projectId})

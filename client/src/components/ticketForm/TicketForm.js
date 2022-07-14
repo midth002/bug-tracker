@@ -17,8 +17,13 @@ import { QUERY_ONE_TICKET } from '../../utils/queries';
 import Select from 'react-select'
 import { useQuery, useMutation } from "@apollo/client";
 import { SAVE_TICKET_CHANGES } from '../../utils/mutations';
-import Button from '@mui/material/Button'
-
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { Label } from 'recharts';
 
 const options = [
   {value: 'Low', label: 'Low' },
@@ -26,7 +31,15 @@ const options = [
   {value: 'High', label: 'High' }
   ]
 
-const TicketForm = ({ ticketId, priority, description, type, created, submitter }) => {
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
+const TicketForm = ({ ticketId, priority, title, description, type, created, submitter }) => {
   // const [typeSelectedOption, setTypeSelectedOption] = useState(null);
 
   const [prioritySelectedOption, setPrioritySelectedOption] = useState(priority);
@@ -34,6 +47,7 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
   const [ticketState, setTicketState] = useState({
       id: ticketId,
       description,
+      title
   })
 
 
@@ -72,51 +86,82 @@ const TicketForm = ({ ticketId, priority, description, type, created, submitter 
     <React.Fragment>
     <CssBaseline />
     <Container maxWidth="lg">
-      <Box sx={{ bgcolor: 'white', height: '60vh' }} component='form'>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-      <FormHelperText>Priority</FormHelperText>
-      {/* <Select
-          defaultValue={priorityData}
-        >
-        <MenuItem value={'high'}>High</MenuItem>
-          <MenuItem value={'moderate'}>Moderate</MenuItem>
-          <MenuItem value={'low'}>Low</MenuItem>
-          </Select> */}
+      <Box sx={{ bgcolor: 'white', height: '65vh', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}} component='form'>
+      <Grid container spacing={4}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'top'
+        }}
+      >
 
-          <Select
+    
+
+
+        <Grid item xs={12}>
+          <label>Description</label>
+         <textarea name='description' defaultValue={description}></textarea>
+     </Grid>
+
+        <Grid item xs={4} className="grid-item" align="center">
+        <label>Priority</label>
+        {/* <Select
+          className='select'
           defaultValue={priority}
           onChange={setPrioritySelectedOption}
           placeholder={priority}
           options={options}
-          />
+          size="small"
+          /> */}
+     
+          <select>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+          </select>
+       
+        </Grid>
 
 
+      
 
-        </FormControl>
-        <div>
-          <div><label>Description</label></div>
-          <textarea 
-          className="description-text" 
-          rows="3" cols="50" 
-          name="description" 
-          defaultValue={description}
-          onChange={handleChange}
-          ></textarea>
-        </div>
-        <div>
-          <h5>Submitter</h5>
-          <p>{submitter}</p>
-        </div>
-        <div>
-          <h5>Type</h5>
-          <p>{type}</p>
-        </div>
-        <div>
-          <h5>Date Created</h5>
-          <p>{created}</p>
-        </div>
-        <Button onClick={handleTicketChanges} variant="contained">Save Changes</Button>
+
+        <Grid item xs={4} align="center" display="inline-block" className="grid-item">
+            <label>Submitter </label>
+            <div><p>{submitter}</p></div>
+       </Grid>
+        
+       <Grid item xs={4} align="center" display="block" className="grid-item">
+            <label>Type of Ticket</label>
+            <div><p>{type}</p></div>
+            
+          </Grid>
+      
+          <Grid item xs={4} align="center" display="block" className="grid-item">
+            <label>Created At</label>
+            <div><p>{created}</p></div>
+            
+          </Grid>
+
+          <Grid item xs={4} align="center" display="inline-block" className="grid-item">
+            <label>Estimated Time (Hours)</label>
+            <div><p>8.5</p></div>
+          </Grid>
+
+          <Grid item xs={4} align="center" display="block" className="grid-item">
+            <label>Assigned To</label>
+            <div><p>{submitter}</p></div>
+          </Grid>
+
+          <Grid item xs={8} align="center" display="block" className="grid-item">
+             <Button onClick={handleTicketChanges} variant="contained" >Save Changes</Button>
+          </Grid>
+       
+        {/* <Button onClick={handleTicketChanges} variant="contained">Save Changes</Button> */}
+        </Grid>
       </Box>
+
+  
   
     </Container>
   </React.Fragment>

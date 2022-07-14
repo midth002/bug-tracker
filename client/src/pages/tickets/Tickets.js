@@ -7,9 +7,16 @@ import TicketModal from '../../components/ticketModal/TicketModal'
 import { QUERY_USER } from '../../utils/queries';
 import { useQuery } from '@apollo/client'
 import Loading from '../../components/loading/Loading'
-
+import Jumbotron from '../../components/jumbotron/Jumbotron'
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Auth from '../../utils/auth';
+import { Container } from '@mui/system';
 
 const Tickets = () => {
+
+  const title = 'TICKETS'
 
   const params = window.location.href;
   const paramArray = params.split('/');
@@ -28,19 +35,20 @@ const Tickets = () => {
   // console.log(userNameData.getOneUser._id);
 
   return (
-    <div className="container">
-    <div className='navbar'>
-        <Navbar />
-    </div>
-    <Sidebar />
-    <div className="projects">
-        <div className="project-header">
-        <h4>All Tickets</h4>
-          <TicketModal user={userNameData.getOneUser._id}/>
-        </div>
-    <AllTicketTable user={user}/>
-    
-    </div>
+
+<div>
+{Auth.loggedIn() ? (
+  <Box sx={{ display: 'flex', flexGrow: 1, flexwrap: 'wrap', justifyContent: 'center'}}>
+      <Sidebar />
+      <Jumbotron title={title} />
+              <AllTicketTable user={user}/>
+
+  </Box>
+) : (
+  <Link to="/login">You are not logged in.</Link>
+)
+}
+
 </div>
   )
 }

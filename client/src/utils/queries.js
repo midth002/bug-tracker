@@ -55,6 +55,9 @@ query GetOneTicket($ticketId: ID) {
     description
     submitter {
       _id
+      username 
+      email 
+      role
     }
     priority
     type

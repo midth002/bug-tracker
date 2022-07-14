@@ -77,17 +77,17 @@ import EditIcon from '@mui/icons-material/Edit';
       display="flex"
       justifyContent="center"
       alignItems="center"
-      style={{ height: 200, width: '100%' }}
+      style={{ height: 225, width: '100%' }}
       >
      
         <DataGrid
           rows={tableData}
           getRowId={row => row._id}
           columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
           rowHeight={30}
-          headerHeight={25}
+          headerHeight={20}
         />
       </Box>
     );

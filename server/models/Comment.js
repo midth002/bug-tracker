@@ -1,7 +1,11 @@
-const { Schema } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 const commentSchema = new Schema (
     {
+        commentId : {
+            type: Schema.Types.ObjectId, 
+            default : () => new Types.ObjectId(),
+        },
         comment: {
             type: String, 
             required: true,

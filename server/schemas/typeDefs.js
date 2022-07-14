@@ -11,6 +11,15 @@ type Ticket {
     type: String!
     status: String!
     createdAt: String
+    assignedTo: [User]
+}
+
+type Comment {
+    commentId: ID!
+    comment: String!
+    createdAt: String
+    createdBy: User!
+    commentOn: Ticket!
 }
 
 type User {
@@ -32,6 +41,7 @@ type Project {
     description: String
     type: String!
     ticketId: [Ticket]
+    members: [User]
     status: String!
 }
 
@@ -47,12 +57,15 @@ type Query {
 
 type Mutation {
     createUser(username: String!, email: String!, role: String!, password: String!): Auth
-    createTicket( submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
+    createTicket(submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
     createProject(title: String!, description: String, type: String!): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
+    addMemberToProject(projectId: ID, members: ID): Project
     login(username: String!, password: String!): Auth
     updateStatus(_id: ID!, status: String!): Ticket
     updateTicketChanges(_id: ID!, priority: String, description: String, type: String): Ticket
+    addTicketComment(ticketId: ID, comment: String): Ticket
+    assignTicket(ticketId: ID, assignedTo: ID): Ticket
 }
 `
 

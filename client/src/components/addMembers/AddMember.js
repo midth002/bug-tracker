@@ -3,16 +3,31 @@ import { Box, Button } from '@mui/material';
 
 
 
-  const columns = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+
+
+const AddMember = ({project}) => {
+
+    const columns = [
+        {field: '_id', headerName: 'ID', width: 100},
+        {
+            field: 'username', 
+            headerName: 'Name',
+            width: 100,
+            editable: false,
+        }, 
+        {
+            field: 'email', 
+            headerName: 'email',
+            width: 150,
+            editable: false,
+        }
   ];
 
+  
 
-const AddMember = () => {
+
+
+
   return (
     <Box
     display="flex"
@@ -25,8 +40,7 @@ const AddMember = () => {
           width: '30%',
           height: 200,
           ml: 20,
-          mr: 3,
-          mt: 8,
+          mt: 2,
           flexWrap: 'wrap'
       }}   
         >

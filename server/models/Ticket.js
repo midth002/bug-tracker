@@ -22,6 +22,10 @@ const ticketSchema = new Schema (
             type: Schema.Types.ObjectId,
             ref: 'user'
         }],
+        assignedTo: [{
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        }],
         priority: {
             type: String,
             required: true
@@ -35,7 +39,8 @@ const ticketSchema = new Schema (
             required: true,
             default: "new"
         },
-        comments: [commentSchema]
+        comments: [{
+            type: commentSchema}]
     },
     {
         toJSON: {

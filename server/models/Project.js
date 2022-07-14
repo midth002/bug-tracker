@@ -22,10 +22,19 @@ const projectSchema = new Schema (
             required: true,
             default: 'in-progress'
         },
-        ticketId : [{
+        createdAt: {
+            type: Date, 
+            default: Date.now,
+        }, 
+        ticketId: [{
                 type: Schema.Types.ObjectId,
                 ref: 'ticket',
             }],
+        members: [{
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        }],
+        
     }, 
     {
         toJSON: {

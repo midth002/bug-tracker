@@ -47,6 +47,21 @@ const resolvers = {
                 {new: true}
             ).populate('ticketId')
         }, 
+        addMemberToProject: async(parent, {projectId, members}) => {
+            return await Project.findOneAndUpdate(
+                {_id: projectId}, 
+                {$push: {members: members}},
+                {new: true}
+            ).populate('members')
+        },
+        assignTicket: async(parent, {ticketId, assignedTo}) => {
+            return await Ticket.findOneAndUpdate(
+                {_id: ticketId}, 
+                {$push: {assignedTo: assignedTo}},
+                {new: true}
+            ).populate('assignedTo')
+        },
+        
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
             if (!user) {
@@ -70,13 +85,14 @@ const resolvers = {
             const result = await Ticket.findOneAndUpdate({_id:props._id}, props, {new: true})
             return result
         },
-        // addTicketComment: async(parent, {ticketId, userId}) => {
-        //    return await Ticket.findOneAndUpdate(
-        //         {_id: ticketId},
-        //         {$push: }
-        //    );
+        addTicketComment: async(parent, {ticketId, comment}) => {
+           return await Ticket.findOneAndUpdate(
+                {_id: ticketId},
+                {$push: {comments: comment}},
+                {new: true}
+           );
 
-        // }
+        }
     }
 }
 

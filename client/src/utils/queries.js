@@ -99,3 +99,13 @@ query GetOneUserByUsername($username: String!) {
     password
   }
 }`;
+
+export const ALL_USERS = gql`
+query allUsers {
+  allUsers {
+    username
+    email
+    role
+    _id
+  }
+}`;

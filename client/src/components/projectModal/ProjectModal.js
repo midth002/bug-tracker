@@ -9,6 +9,8 @@ import Select from 'react-select';
 import { CREATE_PROJECT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import UserList from '../userList/UserList';
+
 
 const style = {
     position: 'absolute',
@@ -93,7 +95,7 @@ const ProjectModal = () => {
             New Project
           </Typography>
             <form onSubmit={handleProjectFormSubmit}>
-            <TextField id="filled-basic" label="Title" name="title" value={projectInputs.title} variant="outlined" onChange={handleChange} size="small" sx={{my:2, width: '100%'}} />
+            <TextField id="filled-basic" label="Title" name="title" value={projectInputs.title} variant="outlined" onChange={handleChange} size="small" sx={{my:1, width: '100%'}} />
             <TextField 
             id="filled-basic" 
             name="description"
@@ -101,10 +103,10 @@ const ProjectModal = () => {
             value={projectInputs.description} 
             onChange={handleChange} 
             variant="outlined"
-            sx={{my:2, width: '100%'}}
+            sx={{my:1, width: '100%'}}
             multiline
-            minRows={6}
-            maxRows={6}
+            minRows={4}
+            maxRows={4}
             />
             <Select
           defaultValue={typeSelectedOption}
@@ -113,6 +115,10 @@ const ProjectModal = () => {
           options={typeOptions}
         
           />
+
+          <UserList />
+
+
 
             <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>
             </form>

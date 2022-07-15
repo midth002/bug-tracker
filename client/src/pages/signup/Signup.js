@@ -79,23 +79,29 @@ const Signup = () => {
 
 <Box className="first-box"
       sx={{
+        mt: 7,
         display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: 'background.paper',
         overflow: 'hidden',
         fontWeight: 'bold',
         width: 600,
-        height: 600
+        height: 500
       }}
     >
+      
+
               {data ? (
              
                <p>Welcome user {data.createUser.user.username}!</p>
 
               
               ) : (
+                
+
+
+
+
                 <form onSubmit={handleFormSubmit} className="signup-form">
                 <FontAwesomeIcon icon={faBug} />
                 <div className='signup-form-title'>Create an account</div>
@@ -109,7 +115,7 @@ const Signup = () => {
                       value={formState.email}
                       onChange={handleChange}
                       sx={{
-                        width: '70%',
+                        width: '80%',
                         m: 1
                         }}
           
@@ -122,7 +128,7 @@ const Signup = () => {
                       value={formState.username}
                       onChange={handleChange}
                       sx={{
-                        width: '70%',
+                        width: '80%',
                         m: 1
                         }}
                      
@@ -137,7 +143,7 @@ const Signup = () => {
                       value={formState.password}
                       onChange={handleChange}
                       sx={{
-                        width: '70%',
+                        width: '80%',
                         m: 1
                         }}
           
@@ -145,15 +151,7 @@ const Signup = () => {
                      
 
                   <div className="role">
-                  {/* <input
-                    className="form-input"
-                    // placeholder="Your username"
-                    name="role"
-                    type="text"
-                    value={formState.role}
-                    onChange={handleChange}
-                    required
-                  /><label>Role</label> */}
+               
                   <div className="role-label"><label>Choose A Role</label></div>
                   <div className="icons">
                     <div className={`${role === 'admin' ? "icon-div active-div" : "icon-div"}`} id="admin" onClick={chooseRole}><FontAwesomeIcon icon={faUserAstronaut} className="fa-2xl icon"/>Admin</div>
@@ -171,7 +169,7 @@ const Signup = () => {
                   <Button 
                    type="submit" 
                    variant="contained" 
-                   color="success"
+                   color="secondary"
                    sx={{
                     width: '70%',
                     m: 2,

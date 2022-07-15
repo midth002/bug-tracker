@@ -11,6 +11,7 @@ class AuthService {
     const decoded = decode(token);
     if (decoded.exp < Date.now() / 10000) {
       localStorage.removeItem('id_token');
+      localStorage.removeItem('username');
       return true;
     }
     return false;
@@ -18,12 +19,19 @@ class AuthService {
   getToken() {
     return localStorage.getItem('id_token');
   }
+  getUsername() {
+    return localStorage.getItem('username');
+  }
+
   login(idToken, username) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/' + username);
+    localStorage.setItem('username', username)
+    window.location.assign('/dashboard');
+    console.log(username)
   }
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('username');
     window.location.reload();
   }
 }

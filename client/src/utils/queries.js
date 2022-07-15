@@ -88,3 +88,14 @@ query GetTicketByType($type: String!) {
     _id
   }
 }`;
+
+export const GET_USERNAME = gql`
+query GetOneUserByUsername($username: String!) {
+  getOneUserByUsername(username: $username) {
+    _id
+    email
+    role
+    username
+    password
+  }
+}`;

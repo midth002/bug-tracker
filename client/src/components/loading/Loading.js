@@ -1,12 +1,19 @@
 import React from 'react';
-import Navbar from '../navbar/Navbar';
+
 import Sidebar from '../sidebar/Sidebar';
+import Jumbotron from '../jumbotron/Jumbotron'
 
 const Loading = () => {
+  const title = "Loading ..."
   return (
     <div>
-        Loading...
+      <Sidebar />
+      <Jumbotron title={title}/>
+        <div>
+          
+        </div>
     </div>
+    
   )
 }
 

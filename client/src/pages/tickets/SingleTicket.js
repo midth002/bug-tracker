@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import ProgressBar from '../../components/progressBar/ProgressBar';
 import TicketForm from '../../components/ticketForm/TicketForm';
@@ -19,7 +18,7 @@ const SingleTicket = () => {
 
     const params = window.location.href;
     const paramArray = params.split('/');
-    const ticketNum = paramArray[5]
+    const ticketNum = paramArray[4]
 
 
 

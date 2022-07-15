@@ -53,6 +53,7 @@ type Query {
     allUsers: [User]!
     getOneUser(userId: ID): User!
     getTicketByType(type: String!): [Ticket]
+    getOneUserByUsername(username: String!): [User]
 }
 
 type Mutation {

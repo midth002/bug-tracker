@@ -1,4 +1,3 @@
-import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'

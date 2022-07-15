@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import AllTicketTable from '../../components/ticketTable/AllTicketTable';
 import Button from '@mui/material/Button';

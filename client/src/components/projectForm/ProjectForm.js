@@ -67,16 +67,16 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
          boxShadow: 3,
         borderRadius: 2,
         width: '100%',
-        padding: 2,
+        padding: 1,
         height: 150,
-        
+        mr: 5,
         display: 'flex', 
         justifyContent: 'center',
         flexWrap: 'wrap'
             }} 
      >
-        <div>
-          
+        <div className="area-div">
+          <label>Description</label>
           <textarea 
           className="description-text" 
           rows="3" cols="30" 

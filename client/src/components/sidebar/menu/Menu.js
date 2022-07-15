@@ -7,24 +7,23 @@ const Menu = () => {
 
   const params = window.location.href;
     const paramArray = params.split('/');
-    console.log(paramArray);
+  
 
-
+  
 
   return (
     <>
     <div className="menu">
         <ul>
-            <li className={paramArray.length === 4 ? "active" : ""}>
-                <a href={`/${paramArray[3]}`}>Dashboard</a>
+            <li className={paramArray[3] === "dashboard" ? "active" : ""}>
+                <a href={`/dashboard`}>Dashboard</a>
             </li>
-            <li className={paramArray[4] === "tickets" ? "active" : ""}>
-                <a href={`/${paramArray[3]}/tickets`}>Tickets</a>
+            <li className={paramArray[3] === "tickets" ? "active" : ""}>
+                <a href={`/tickets`}>Tickets</a>
             </li>
-            <li className={paramArray[4] === "users" ? "active" : ""}>
-              <a href={`/${paramArray[3]}/users`}>Admin</a>
+            <li className={paramArray[3] === "settings" ? "active" : ""}>
+              <a href={`/settings`}>Settings</a>
             </li>
-           
         </ul>
 
     </div>

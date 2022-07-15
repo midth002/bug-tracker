@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
   const getProjects = async () => {
     const projects = await projectData?.allProjects || [];
     setTableData(projects);
-    console.log(projects);
+ 
   }
 
   getProjects();
@@ -51,23 +51,7 @@ import EditIcon from '@mui/icons-material/Edit';
       width: 500,
       editable: false,
     },
-    {
-      field: "edit",
-      headerName: "Edit",
-     
-      headerClassName: 'header-style',
-      sortable: false,
-      width: 130,
-      disableClickEventBubbling: true,
-      renderCell: () => {
-        
-        return (
-          <Button variant="contained" color="primary" startIcon={<EditIcon />} style={{maxWidth: '100px', maxHeight: '25px', minWidth: '30px', minHeight: '20px', fontSize: '12px'}}>
-          Edit
-        </Button>
-        );
-      }
-    }
+   
  
   ];
 

@@ -55,7 +55,7 @@ const Login = () => {
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: 'background.paper',
+        // bgcolor: 'background.paper',
         overflow: 'hidden',
         fontWeight: 'bold',
         width: 600,
@@ -72,7 +72,7 @@ const Login = () => {
                  
                  
                   <form onSubmit={handleFormSubmit} className="login-form">
-                  <FontAwesomeIcon icon={faBug} />
+                  <FontAwesomeIcon icon={faBug}  />
                   <div className='login-form-title p-b-26 text-primary'>Login to BugTracker</div>
                  
                  
@@ -112,7 +112,7 @@ const Login = () => {
                    <Button 
                    type="submit" 
                    variant="contained" 
-                   color="success"
+                   color="secondary"
                    sx={{
                     width: '70%',
                     m: 2,

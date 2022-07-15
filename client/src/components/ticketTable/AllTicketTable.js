@@ -12,30 +12,12 @@ import Grid from '@mui/material/Grid'
 import './ticketTable.scss'
 
 const AllTicketTable = ({user, ticket}) => {
-
-  //   const { loading: ticketsLoading, data: ticketsData, error} = useQuery(QUERY_TICKETS);
-  //   const [tableData, setTableData] = useState([])
-
-  //   if (ticketsLoading) return <Loading />;
-  //   if (!ticketsData) return <p>Not Found</p>;
-  //   const getTickets = async () => {
-  //       const tickets = await ticketsData?.allTickets || [];
-  //       setTableData(tickets);
-  //   }
-
-  //   getTickets();
-
-  // const handleClick = (event, value) => {
-  //   console.log(event, value);
-  // }
  
-  
-
     const columns = [
-        { field: '_id', headerName: 'ID', hide: true,  
+        { field: '_id', headerName: 'ID',  
         renderCell: (cellValues) => {
               
-          return <Link to={`/${user}/tickets/${cellValues.id}`}>{cellValues.id}</Link>;
+          return <Link to={`/tickets/${cellValues.id}`}>{cellValues.id}</Link>;
         },
         
         width: 200 },

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 
+import GoBack from '../../components/goBack/GoBack';
 import ProgressBar from '../../components/progressBar/ProgressBar';
 import ProjectForm from '../../components/projectForm/ProjectForm';
 import Loading from '../../components/loading/Loading';
@@ -29,11 +29,7 @@ const SingleProject = () => {
         if (projectLoading) return <Loading />;
         if (!projectData) return <p>Not Found</p>;
 
-      const getProjectInformation = async () => {
-        console.log(projectData.getOneProject.ticketId)
-      }
 
-    getProjectInformation();
 
     const title = projectData.getOneProject.title
 
@@ -42,14 +38,17 @@ const SingleProject = () => {
 
         <Sidebar />
         <Jumbotron title={title}/>
-        <Grid container spacing={1}
+        {/* <GoBack /> */}
+        <Grid container spacing={2}
         className="ticket" 
         sx={{ml: 14,
             mt: 7
         }}
         >
       
-               <Grid item xs={4}>
+               <Grid item xs={4} sx={{
+              
+               }}>
               
                
                     <ProjectForm
@@ -57,9 +56,15 @@ const SingleProject = () => {
                     type={projectData.getOneProject.type}
                     projectId={projectData.getOneProject._id}
                     />
+                    
+              </Grid>
+
+              <Grid item xs={1}>
+                <div></div>
               </Grid>
               
-              <Grid item xs={4}><AddMember member={projectData.getOneProject.members}/></Grid>
+              <Grid item xs={4} 
+           ><AddMember member={projectData.getOneProject.members}/></Grid>
           
                 
                <Grid item xs={10}>

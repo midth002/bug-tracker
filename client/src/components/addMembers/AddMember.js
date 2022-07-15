@@ -58,7 +58,7 @@ const AddMember = ({member}) => {
         
         }}>
         <h5>Team </h5>
-        <Button>Add Member</Button>
+        <Button sx={{fontSize: '12px', padding: 1}}>Add Member</Button>
     </Box>
 
     <Box 

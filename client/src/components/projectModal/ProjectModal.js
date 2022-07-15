@@ -107,7 +107,7 @@ const ProjectModal = () => {
             maxRows={6}
             />
             <Select
-         defaultValue={typeSelectedOption}
+          defaultValue={typeSelectedOption}
           onChange={setTypeSelectedOption}
           placeholder="Type"
           options={typeOptions}

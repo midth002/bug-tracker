@@ -40,8 +40,7 @@ const Tickets = () => {
 }
 
   getTickets();
-  console.log(tableData)
-
+ 
  
 
   return (

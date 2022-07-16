@@ -27,10 +27,6 @@ const AddMember = ({member}) => {
         }
   ];
 
-  
-
-
-
 
   return (
     <Box

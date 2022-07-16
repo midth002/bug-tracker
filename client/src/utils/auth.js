@@ -12,6 +12,7 @@ class AuthService {
     if (decoded.exp < Date.now() / 10000) {
       localStorage.removeItem('id_token');
       localStorage.removeItem('username');
+      window.location.reload();
       return true;
     }
     return false;

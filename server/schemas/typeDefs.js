@@ -45,6 +45,10 @@ type Project {
     status: String!
 }
 
+input MemberInput {
+    _id: ID
+}
+
 type Query {
     allTickets: [Ticket]!
     getOneTicket(ticketId: ID): Ticket!
@@ -59,7 +63,7 @@ type Query {
 type Mutation {
     createUser(username: String!, email: String!, role: String!, password: String!): Auth
     createTicket(submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
-    createProject(title: String!, description: String, type: String!): Project
+    createProject(title: String!, description: String, type: String!, members: [MemberInput]): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
     addMemberToProject(projectId: ID, members: ID): Project
     login(username: String!, password: String!): Auth

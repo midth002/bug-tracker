@@ -62,12 +62,14 @@ mutation Mutation($id: ID!, $priority: String, $description: String, $type: Stri
 }`;
 
 export const CREATE_PROJECT = gql`
-mutation Mutation($title: String!, $type: String!, $description: String) {
-  createProject(title: $title, type: $type, description: $description) {
+mutation CreateProject($title: String!, $type: String!, $members: [MemberInput], $description: String) {
+  createProject(title: $title, type: $type, members: $members, description: $description) {
     _id
     title
-    description
     type
-    status
+    members {
+      _id
+    }
+    description
   }
 }`;

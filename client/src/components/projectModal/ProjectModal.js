@@ -10,6 +10,13 @@ import { CREATE_PROJECT } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import UserList from '../userList/UserList';
+import { useQuery } from '@apollo/client';
+import { ALL_USERS } from '../../utils/queries';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
 
 
 const style = {
@@ -46,15 +53,22 @@ const ProjectModal = () => {
         description: ''
     })
 
+    const [checkedUsers, setCheckedUsers] = useState([]);
+
+
+
+    const {loading, data, error: userError } = useQuery(ALL_USERS);
+
+    if (!data) return <p>No users Found</p>;
+    const userList = data?.allUsers || [];
+
+
 
   
     const handleChange = (event) => {
         const { name, value } = event.target;
-        // const submitPriority = prioritySelectedOption.value
-        // const submitType = typeSelectedOption.value
+       
         setProjectInputs({
-            // priority: submitPriority,
-            // type: submitType,
           ...projectInputs,
           [name]: value,
         });
@@ -70,7 +84,8 @@ const ProjectModal = () => {
             const { data } = await createProject({
                 variables: {
                     type: submitType,
-                    ...projectInputs
+                    ...projectInputs,
+                    members: checkedUsers,
                 }  
             })
 
@@ -80,6 +95,8 @@ const ProjectModal = () => {
             console.error(JSON.stringify(e, null, 2))
         }
     }
+
+    
 
   return (
     <div>
@@ -116,9 +133,7 @@ const ProjectModal = () => {
         
           />
 
-          <UserList />
-
-
+          <UserList usernameList={userList}/>
 
             <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>
             </form>

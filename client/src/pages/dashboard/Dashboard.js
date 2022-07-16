@@ -11,6 +11,8 @@ import Chart from '../../components/chart/Chart';
 import Projects from '../projects/Projects';
 
 const Dashboard = () => {
+
+
     const title = 'DASHBOARD'
   return (
     <div>

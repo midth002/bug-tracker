@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
+import {Box, Button, Typography, Modal, TextField} from '@mui/material'
 import Select from 'react-select';
 import { CREATE_TICKET } from '../../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { QUERY_PROJECTS, ALL_USERS } from '../../utils/queries';
+import { useMutation, useQuery} from '@apollo/client';
+import UserList from '../userList/UserList';
 
 const style = {
     position: 'absolute',
@@ -43,23 +40,32 @@ const TicketModal = ({user}) => {
     const handleClose = () => setShowModal(false);
     const [typeSelectedOption, setTypeSelectedOption] = useState(null);
     const [prioritySelectedOption, setPrioritySelectedOption] = useState(null);
-
-    const [createTicket, {error} ] = useMutation(CREATE_TICKET);
     const [ticket, setTicket] = useState({
-        submitter: user,
-        title: '',
-        description: ''
-    })
+      submitter: user,
+      title: '',
+      description: ''
+  })
+    
+    const {loading, data, error: userError } = useQuery(ALL_USERS);
+    const {loading: projectsLoading, data: projectsData, error: projectError} = useQuery(QUERY_PROJECTS);
+    const [createTicket, {error} ] = useMutation(CREATE_TICKET);
+  
 
+    if(projectsLoading) return <p>Loading...</p>
+    if(!projectsData) return <p>No Projects Found</p>
+
+    const projectList = projectsData?.allUsers || [];
+
+    
+    if (loading) return <p>Loading...</p>
+    if (!data) return <p>No users Found</p>;
+    const userList = data?.allUsers || [];
+    
 
   
     const handleChange = (event) => {
         const { name, value } = event.target;
-        // const submitPriority = prioritySelectedOption.value
-        // const submitType = typeSelectedOption.value
         setTicket({
-            // priority: submitPriority,
-            // type: submitType,
           ...ticket,
           [name]: value,
         });
@@ -104,18 +110,18 @@ const TicketModal = ({user}) => {
             New Ticket
           </Typography>
             <form onSubmit={handleTicketFormSubmit}>
-            <TextField id="filled-basic" label="Title" name="title" value={ticket.title} variant="outlined" onChange={handleChange} size="small" sx={{my:2, width: '100%'}}/>
+            <TextField id="filled-basic" label="Title" name="title" value={ticket.title} variant="outlined" onChange={handleChange} size="small" sx={{my:1, width: '100%'}}/>
             <TextField  
             id="filled-basic" 
             name="description"
-            label="Project Description"
+            label="Ticket Description"
             value={ticket.description} 
             onChange={handleChange} 
             variant="outlined"
-            sx={{my:2, width: '100%'}}
+            sx={{my:1, width: '100%'}}
             multiline
-            minRows={6}
-            maxRows={6} />
+            minRows={3}
+            maxRows={3} />
             <Select
          defaultValue={typeSelectedOption}
           onChange={setTypeSelectedOption}
@@ -133,6 +139,8 @@ const TicketModal = ({user}) => {
           sx={{mt: 2}}
          
           />
+
+          <UserList usernameList={userList} />
 
             <Button type="submit" color="success" variant="contained" sx={{mt:2}}>Create Ticket</Button>
             </form>

@@ -9,19 +9,9 @@ import { useQuery } from '@apollo/client';
 import { ALL_USERS } from '../../utils/queries';
 
 
-const UserList = () => {
+const UserList = ({usernameList}) => {
 
     const [checkedUsers, setCheckedUsers] = useState([]);
-
-
-
-    const {loading, data, error } = useQuery(ALL_USERS);
-
-    if (!data) return <p>No users Found</p>;
-
-
-    const userList = data?.allUsers || [];
-    const usernameList = userList.filter(user => user.username)
 
     
     const handleChange = (event) => {
@@ -41,7 +31,6 @@ const UserList = () => {
         setCheckedUsers(newChecked);
     }
 
-    console.log(checkedUsers)
 
   
 
@@ -56,12 +45,11 @@ const UserList = () => {
         sx={{
             position: 'relative',
         overflow: 'auto',
-
-        maxHeight: 125,
+        maxHeight: 75,
         '& ul': { padding: 0 },
         }}
         >
-        {userList.map((user) => 
+        {usernameList.map((user) => 
             <ListItem
             key={user._id}
             secondaryAction = {

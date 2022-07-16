@@ -1,4 +1,4 @@
-
+import Auth from './utils/auth'
 import Dashboard from './pages/dashboard/Dashboard';
 import Signup from './pages/signup/Signup';
 import './App.scss';
@@ -27,6 +27,7 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
+  // console.log(Auth.isTokenExpired(token))
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -42,11 +43,29 @@ const client = new ApolloClient({
  cache: new InMemoryCache(), 
 });
 
+
 function App() {
+
+  const myToken = localStorage.getItem('id_token');
+  // console.log(myToken)
+  // const toggleToken = Auth.isTokenExpired(myToken)
+ 
+
+
   return (
     <ApolloProvider client={client}>
-    <Router>
+    {myToken == null ? (
+      <Router>
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </Router>
+    ) : (
+      <Router>
     <Routes> 
+    
       <Route path='/' element={<LandingPage />} />
       <Route path='/dashboard' element={<Dashboard/>} />
       <Route path='/projects' element={<ProjectView />} />
@@ -58,10 +77,13 @@ function App() {
       <Route path='/settings' element={<Settings />}/>
     </Routes>
     </Router>
+    )}
+   
 
     </ApolloProvider>
  
   );
-}
+  }
+
 
 export default App;

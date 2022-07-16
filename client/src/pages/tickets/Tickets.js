@@ -12,27 +12,36 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Auth from '../../utils/auth';
 import { Container } from '@mui/system';
-import { QUERY_TICKETS} from "../../utils/queries";
+import { QUERY_TICKETS, GET_USERNAME} from "../../utils/queries";
 
 
 const Tickets = () => {
 
-  const title = 'TICKETS'
-
-  const params = window.location.href;
-  const paramArray = params.split('/');
-  const user = paramArray[3]
-
-  const {loading: ticketsLoading, data: ticketData, error: ticketError} = 
-  useQuery(QUERY_TICKETS)
-
-
   const [tableData, setTableData] = useState([])
 
+  const title = 'TICKETS'
+  const username = Auth.getUsername();
+  console.log(username)
+  
+  const {loading: userLoading, data: userData, error: userError} = useQuery(GET_USERNAME, {
+    variables: {
+      username: username
+    }
+  });
+
+  if(userLoading) return <Loading />
 
 
-  if (ticketsLoading) return <Loading />;
- if (!ticketData) return <p>Not Found</p>;
+
+  const user = userData.getOneUserByUsername[0]._id
+
+  const {loading: ticketsLoading, data: ticketData, error: ticketError} = 
+  useQuery(QUERY_TICKETS);
+
+  
+
+    if (ticketsLoading) return <Loading />;
+    if (!ticketData) return <p>Not Found</p>;
   
   const getTickets = async () => {
     const tickets = await ticketData?.allTickets || [];
@@ -41,8 +50,6 @@ const Tickets = () => {
 
   getTickets();
  
- 
-
   return (
 
 <div>

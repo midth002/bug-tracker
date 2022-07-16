@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import {Box, Button, Typography, Modal, TextField} from '@mui/material'
 import Select from 'react-select';
-import { CREATE_TICKET } from '../../utils/mutations';
-import { QUERY_PROJECTS, ALL_USERS } from '../../utils/queries';
+import { CREATE_TICKET, ADD_TICKET_TO_PROJECT } from '../../utils/mutations';
+import { QUERY_PROJECTS, ALL_USERS, GET_USERNAME } from '../../utils/queries';
 import { useMutation, useQuery} from '@apollo/client';
 import UserList from '../userList/UserList';
+import ProjectDropDown from '../dropdowns/ProjectDropDown';
+
 
 const style = {
     position: 'absolute',
@@ -36,8 +38,8 @@ const style = {
 const TicketModal = ({user}) => {
 
     const [showModal, setShowModal] = useState(false);
-    const handleOpen = () => setShowModal(true);
-    const handleClose = () => setShowModal(false);
+    const [memberData, setMemberData] = useState();
+    const [projectData, setProjectData] = useState(null);
     const [typeSelectedOption, setTypeSelectedOption] = useState(null);
     const [prioritySelectedOption, setPrioritySelectedOption] = useState(null);
     const [ticket, setTicket] = useState({
@@ -45,23 +47,33 @@ const TicketModal = ({user}) => {
       title: '',
       description: ''
   })
-    
+
+  const handleOpen = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
+
+
     const {loading, data, error: userError } = useQuery(ALL_USERS);
     const {loading: projectsLoading, data: projectsData, error: projectError} = useQuery(QUERY_PROJECTS);
     const [createTicket, {error} ] = useMutation(CREATE_TICKET);
-  
+    const [setTicketToProject, {error: ticketToProjectError}] = useMutation(ADD_TICKET_TO_PROJECT);
+
 
     if(projectsLoading) return <p>Loading...</p>
     if(!projectsData) return <p>No Projects Found</p>
 
-    const projectList = projectsData?.allUsers || [];
-
-    
+    const projectList = projectsData?.allProjects || [];
+  
     if (loading) return <p>Loading...</p>
     if (!data) return <p>No users Found</p>;
     const userList = data?.allUsers || [];
     
+    const childToParent = (childdata) => {
+      setMemberData(childdata);
+    }
 
+    const projectDropDownToModal = (childdata) => {
+      setProjectData(childdata);
+    }
   
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -90,10 +102,28 @@ const TicketModal = ({user}) => {
             })
 
            console.log("Success", data);
+           console.log(projectData)
+          if(!projectData == null) {
+            try {
+              const { secondData } = await setTicketToProject({
+                variables: {
+                  projectId: projectData.value,
+                  ticketId: data.createTicket._id
+                }
+              })
+  
+            } catch(e) {
+              alert('Adding a ticket to the project failed!')
+              console.error(JSON.stringify(e, null, 2))
+            }
+          }
+           
         } catch (e) {
             console.log("failed")
             console.error(JSON.stringify(e, null, 2))
         }
+
+      
     }
 
   return (
@@ -127,9 +157,6 @@ const TicketModal = ({user}) => {
           onChange={setTypeSelectedOption}
           placeholder="Type"
           options={typeOptions}
-         
-       
-        
           />
             <Select
           defaultValue={prioritySelectedOption}
@@ -140,7 +167,9 @@ const TicketModal = ({user}) => {
          
           />
 
-          <UserList usernameList={userList} />
+          <ProjectDropDown projectList={projectList} childToParent={projectDropDownToModal}/>
+
+          <UserList usernameList={userList} childToParent={childToParent}/>
 
             <Button type="submit" color="success" variant="contained" sx={{mt:2}}>Create Ticket</Button>
             </form>

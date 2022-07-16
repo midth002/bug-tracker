@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { ALL_USERS } from '../../utils/queries';
 
 
-const UserList = ({usernameList}) => {
+const UserList = ({usernameList, childToParent}) => {
 
     const [checkedUsers, setCheckedUsers] = useState([]);
 
@@ -21,7 +21,7 @@ const UserList = ({usernameList}) => {
         if (event.target.checked) {
             console.log(`The user,  is checked`);
            
-            newChecked.push(newUser)
+            newChecked.push({_id: newUser})
             
         } else {
             console.log('Checkbox is unchecked')
@@ -29,9 +29,13 @@ const UserList = ({usernameList}) => {
         }
         
         setCheckedUsers(newChecked);
+    
     }
 
+    childToParent(checkedUsers);
 
+   
+    
   
 
 

@@ -73,3 +73,14 @@ mutation CreateProject($title: String!, $type: String!, $members: [MemberInput],
     description
   }
 }`;
+
+export const ADD_TICKET_TO_PROJECT = gql`mutation AddTicketToProject($projectId: ID, $ticketId: ID) {
+  addTicketToProject(projectId: $projectId, ticketId: $ticketId) {
+    _id
+    title
+    ticketId {
+      _id
+      title
+    }
+  }
+}`;

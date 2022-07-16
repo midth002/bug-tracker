@@ -43,17 +43,16 @@ const style = {
 const ProjectModal = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [typeSelectedOption, setTypeSelectedOption] = useState(null);
+    const [memberData, setMemberData] = useState();
     const handleOpen = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
-    const [typeSelectedOption, setTypeSelectedOption] = useState(null);
    
     const [createProject, {error} ] = useMutation(CREATE_PROJECT);
     const [projectInputs, setProjectInputs] = useState({
         title: '',
         description: ''
     })
-
-    const [checkedUsers, setCheckedUsers] = useState([]);
 
 
 
@@ -62,7 +61,10 @@ const ProjectModal = () => {
     if (!data) return <p>No users Found</p>;
     const userList = data?.allUsers || [];
 
-
+    const childToParent = (childdata) => {
+      setMemberData(childdata);
+      console.log("members", memberData)
+    }
 
   
     const handleChange = (event) => {
@@ -85,7 +87,7 @@ const ProjectModal = () => {
                 variables: {
                     type: submitType,
                     ...projectInputs,
-                    members: checkedUsers,
+                    members: memberData,
                 }  
             })
 
@@ -133,7 +135,7 @@ const ProjectModal = () => {
         
           />
 
-          <UserList usernameList={userList}/>
+          <UserList usernameList={userList} childToParent={childToParent}/>
 
             <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>
             </form>

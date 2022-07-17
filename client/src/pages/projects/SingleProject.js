@@ -14,6 +14,7 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import { Box, Grid} from '@mui/material';
 import AddMember from '../../components/addMembers/AddMember';
 import AllTicketTable from '../../components/ticketTable/AllTicketTable';
+
 const SingleProject = () => {
 
     const params = window.location.href;
@@ -32,6 +33,9 @@ const SingleProject = () => {
 
 
     const title = projectData.getOneProject.title
+      console.log(projectData.getOneProject)
+
+
 
     return (
         <div className="container">
@@ -51,9 +55,7 @@ const SingleProject = () => {
               
                
                     <ProjectForm
-                    description={projectData.getOneProject.description} 
-                    type={projectData.getOneProject.type}
-                    projectId={projectData.getOneProject._id}
+                    project={projectData.getOneProject}
                     />
                     
               </Grid>

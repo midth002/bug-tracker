@@ -16,19 +16,22 @@ import { QUERY_ONE_TICKET } from '../../utils/queries';
 import Select from 'react-select'
 import { useQuery, useMutation } from "@apollo/client";
 import { SAVE_TICKET_CHANGES } from '../../utils/mutations';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
+import Moment from 'react-moment';
 import './projectForm.scss';
 
 
-const ProjectForm = ({ projectId, title, description, type, created }) => {
-  // const [typeSelectedOption, setTypeSelectedOption] = useState(null);
+const ProjectForm = ({ project }) => {
+
 
   const [updateTicket, {error} ] = useMutation(SAVE_TICKET_CHANGES);
   const [projectState, setProjectState] = useState({
-      id: projectId,
-      title,
-      description,
+      id: project.projectId,
+      title: project.title,
+      description: project.description,
   })
+
+const projectCreatedDate = project.createdAt
 
 
   const handleChange = (event) => {
@@ -81,17 +84,17 @@ const ProjectForm = ({ projectId, title, description, type, created }) => {
           className="description-text" 
           rows="3" cols="30" 
           name="description" 
-          defaultValue={description}
+          defaultValue={project.description}
           onChange={handleChange}
           ></textarea>
         </div>
         <div>
         <label>Type of Project</label>
-            <div className="div-value"><p>{type}</p></div>
+            <div className="div-value"><p>{project.type}</p></div>
         </div>
         <div>
         <label>Created At</label>
-        <div><p>{created}</p></div>
+        <div className="div-value"><p><Moment>projectCreatedDate</Moment></p></div>
         </div>
         {/* <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button> */}
 

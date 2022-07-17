@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import Select from 'react-select';
 import { CREATE_PROJECT } from '../../utils/mutations';
-import { useMutation } from '@apollo/client';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import UserList from '../userList/UserList';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { ALL_USERS } from '../../utils/queries';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
+import {
+   Alert,
+   Box, 
+   Button, 
+   Typography,
+   Modal, 
+   TextField, 
+  } from '@mui/material'
 
 
 const style = {
@@ -54,15 +49,12 @@ const ProjectModal = () => {
         description: ''
     })
 
-
-
     const {loading, data, error: userError } = useQuery(ALL_USERS);
     if (!data) return <p>No users Found</p>;
     const userList = data?.allUsers || [];
 
     const childToParent = (childdata) => {
       setMemberData(childdata);
-      console.log("members", memberData)
     }
 
   
@@ -90,7 +82,10 @@ const ProjectModal = () => {
                 }  
             })
 
+            
            console.log("Success", data);
+           setShowModal(false);
+           return (<Alert severity="success" onClose={() => {}}>Project Added!</Alert>)
         } catch (e) {
             console.log("failed")
             console.error(JSON.stringify(e, null, 2))

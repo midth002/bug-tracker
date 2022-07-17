@@ -30,6 +30,7 @@ query GetOneProject($projectId: ID) {
       role
     }
     status
+    createdAt
   }
 }
 `;

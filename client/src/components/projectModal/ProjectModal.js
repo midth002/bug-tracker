@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Select from 'react-select';
 import { CREATE_PROJECT } from '../../utils/mutations';
 import UserList from '../userList/UserList';
+import Notification from '../notification/Notification';
 import { useQuery, useMutation } from '@apollo/client';
 import { ALL_USERS } from '../../utils/queries';
 import {
@@ -11,7 +12,9 @@ import {
    Typography,
    Modal, 
    TextField, 
+   Snackbar,
   } from '@mui/material'
+import { set } from 'mongoose';
 
 
 const style = {
@@ -38,8 +41,13 @@ const style = {
 const ProjectModal = () => {
 
     const [showModal, setShowModal] = useState(false);
+
+    const [notification, setNotification] = useState(false)
     const [typeSelectedOption, setTypeSelectedOption] = useState(null);
     const [memberData, setMemberData] = useState();
+    const [errorMsgToggle, setErrorMsgToggle] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+   
     const handleOpen = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
    
@@ -49,12 +57,29 @@ const ProjectModal = () => {
         description: ''
     })
 
+
     const {loading, data, error: userError } = useQuery(ALL_USERS);
     if (!data) return <p>No users Found</p>;
     const userList = data?.allUsers || [];
 
     const childToParent = (childdata) => {
       setMemberData(childdata);
+    }
+
+    
+
+    const handleAlertOpen = () => {
+      setNotification(true)
+  }
+
+  const handleAlertClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+     
+      setNotification(false);
+      setErrorMsg(false);
+      setErrorMsgToggle(false);
     }
 
   
@@ -68,10 +93,17 @@ const ProjectModal = () => {
     
       };
     
-  
     const handleProjectFormSubmit = async (event) => {
         event.preventDefault();
+        
+        if (typeSelectedOption == null) {
+          setErrorMsgToggle(true);
+          setErrorMsg('Please Enter a Type of Project')
+          return;
+        }
         const submitType = typeSelectedOption.value
+
+        
  
         try {
             const { data } = await createProject({
@@ -85,11 +117,16 @@ const ProjectModal = () => {
             
            console.log("Success", data);
            setShowModal(false);
-           return (<Alert severity="success" onClose={() => {}}>Project Added!</Alert>)
+           setNotification(true);
+        
+          
         } catch (e) {
             console.log("failed")
             console.error(JSON.stringify(e, null, 2))
+            setErrorMsgToggle(true);
+            setErrorMsg('Request was not sent! Please make sure Title, Description, and Type is entered.')
         }
+        
     }
 
     
@@ -131,12 +168,30 @@ const ProjectModal = () => {
 
           <UserList usernameList={userList} childToParent={childToParent}/>
 
+           
             <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>
+           { errorMsgToggle ? (
+            <Alert onClose={handleAlertClose} severity="error" sx={{ width: '80%' }}>
+                 {errorMsg}
+             </Alert>
+           ) : (
+            <></>
+           )
+            
+           }
             </form>
           
           
         </Box>
       </Modal>
+
+  
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleAlertClose}>
+             <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
+                 Project Created!
+             </Alert>
+            </Snackbar>   
+  
   </div>
   )
 }

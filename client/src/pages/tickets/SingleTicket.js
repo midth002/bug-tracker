@@ -76,7 +76,7 @@ const SingleTicket = () => {
                 
             </Box>
 
-            <Box
+            {/* <Box
             bgcolor="white"
         sx={{
             boxShadow: 3,
@@ -88,7 +88,7 @@ const SingleTicket = () => {
         }}>
             
             <Comments />
-            </Box>
+            </Box> */}
         
         </Box>
       )

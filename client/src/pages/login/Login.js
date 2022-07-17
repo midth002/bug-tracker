@@ -26,9 +26,24 @@ const Login = () => {
     };
 
   
+    const loginAsDemoUser = async () => {
+      try {
+        const { data } = await login({
+          variables: { 
+            username: 'demouser',
+            password: 'password12345'
+           },
+        });
+        
+        Auth.login(data.login.token, data.login.user.username);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -50,7 +65,7 @@ const Login = () => {
        
       <Box className="first-box"
       sx={{
-        mt: 7,
+      
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
@@ -59,7 +74,7 @@ const Login = () => {
         overflow: 'hidden',
         fontWeight: 'bold',
         width: 600,
-        height: 500
+        height: 600
       }}
     >
     
@@ -122,7 +137,7 @@ const Login = () => {
                 
                   
                   <div>
-                  <p className="sign-up-link">Don't have an account? <Link to="/signup">Signup instead</Link></p>
+                  <p className="sign-up-link">Don't have an account? <Link to="/signup">Signup Instead</Link> OR <Button color="secondary" onClick={loginAsDemoUser}>Login As Demo User</Button></p>
                   </div>
                   </form>
                   

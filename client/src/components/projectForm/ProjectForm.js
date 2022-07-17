@@ -31,7 +31,10 @@ const ProjectForm = ({ project }) => {
       description: project.description,
   })
 
-const projectCreatedDate = project.createdAt
+
+var date = project.createdAt;
+var d = new Date(parseInt(date));
+var ds = d.toString('MM/dd/yy');
 
 
   const handleChange = (event) => {
@@ -94,7 +97,7 @@ const projectCreatedDate = project.createdAt
         </div>
         <div>
         <label>Created At</label>
-        <div className="div-value"><p><Moment>projectCreatedDate</Moment></p></div>
+        <div className="div-value"><p><Moment format="MM/DD/YYYY">{ds}</Moment></p></div>
         </div>
         {/* <Button onClick={handleProjectChanges} variant="contained">Save Changes</Button> */}
 

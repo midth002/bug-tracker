@@ -23,6 +23,12 @@ const AddMember = ({member, projectId}) => {
             headerName: 'email',
             width: 220,
             editable: false,
+        }, 
+        {
+          field: 'role', 
+          headerName: 'role',
+          width: 100, 
+          editable: false,
         }
   ];
 
@@ -47,9 +53,9 @@ const AddMember = ({member, projectId}) => {
     sx={{width: '100%',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'top',
+        alignItems: 'center',
       
-        height: 45
+        height: 35
         
         }}>
         <h5>Team </h5>

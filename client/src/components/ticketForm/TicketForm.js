@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 // import Select from '@mui/material/Select';
+import Moment from 'react-moment';
 import TextField from '@mui/material/TextField'
 import './ticketform.scss';
 import Loading from '../loading/Loading';
@@ -105,14 +106,7 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
 
         <Grid item xs={4} className="grid-item" align="center">
         <label>Priority</label>
-        {/* <Select
-          className='select'
-          defaultValue={priority}
-          onChange={setPrioritySelectedOption}
-          placeholder={priority}
-          options={options}
-          size="small"
-          /> */}
+       
      
           <select>
               <option>High</option>
@@ -139,14 +133,14 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
       
           <Grid item xs={4} align="center" display="block" className="grid-item">
             <label>Created At</label>
-            <div><p>{created}</p></div>
+            <div><p><Moment format="MM/DD/YYYY">{created}</Moment></p></div>
             
           </Grid>
 
-          <Grid item xs={4} align="center" display="inline-block" className="grid-item">
+          {/* <Grid item xs={4} align="center" display="inline-block" className="grid-item">
             <label>Estimated Time (Hours)</label>
             <div><p>8.5</p></div>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={4} align="center" display="block" className="grid-item">
             <label>Assigned To</label>

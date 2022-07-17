@@ -10,12 +10,12 @@ const ProgressBar = ({status, ticketId}) => {
       id: ticketId,
   })
 
-  console.log(updateStatus);
+ 
 
   const changeTicketStatus = async (event) => {
     event.preventDefault();
     const currentStatus  = event.target.id;
-    console.log(currentStatus);
+    
     try {
       const { data } = await updateTicketStatus({
           variables: {

@@ -17,6 +17,8 @@ const Signup = () => {
         username: '',
         email: '',
         password: '',
+        firstName: '',
+        lastName: ''
       });
       const [createUser, { error, data }] = useMutation(CREATE_USER);
       const [ login, {data:loginData}] = useMutation(LOGIN_USER);
@@ -70,30 +72,26 @@ const Signup = () => {
   
     };
 
-    // const alertSignedUp = (newUser) => {
-    //   alert('Welcome ' + newUser)
-    // }
-  
     return (
       <div className='first-container'>
 
 <Box className="first-box"
       sx={{
-        mt: 7,
+        
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
         fontWeight: 'bold',
         width: 600,
-        height: 500
+        height: 600
       }}
     >
       
 
               {data ? (
              
-               <p>Welcome user {data.createUser.user.username}!</p>
+               <p>Welcome {data.createUser.user.firstName}!</p>
 
               
               ) : (
@@ -104,8 +102,51 @@ const Signup = () => {
 
                 <form onSubmit={handleFormSubmit} className="signup-form">
                 <FontAwesomeIcon icon={faBug} />
-                <div className='signup-form-title'>Create an account</div>
+                <div className='signup-form-title'>Signup To BugTracker</div>
+
+                 
+                <TextField
+                      id="standard-basic" label="First Name" variant="standard"
+                      name="firstName"
+                      type="text"
+                      value={formState.firstName}
+                      onChange={handleChange}
+                      sx={{
+                        width: '38%',
+                        m: 1,
+                        color: "secondary"
+                        }}
+                     
+                    />
+
+                  <TextField
+                      id="standard-basic" label="Last Name" variant="standard"
+                      name="lastName"
+                      type="text"
+                      value={formState.lastName}
+                      onChange={handleChange}
+                      sx={{
+                        width: '38%',
+                        m: 1,
+                        color: "secondary"
+                        }}
+                     
+                    />
+
                 
+                
+                <TextField
+                      id="standard-basic" label="username" variant="standard"
+                      name="username"
+                      type="text"
+                      value={formState.username}
+                      onChange={handleChange}
+                      sx={{
+                        width: '80%',
+                        m: 1
+                        }}
+                     
+                    />
 
                 <TextField
                       
@@ -121,18 +162,7 @@ const Signup = () => {
           
                     />
 
-                <TextField
-                      id="standard-basic" label="username" variant="standard"
-                      name="username"
-                      type="text"
-                      value={formState.username}
-                      onChange={handleChange}
-                      sx={{
-                        width: '80%',
-                        m: 1
-                        }}
-                     
-                    />
+              
                   
         
                   <TextField

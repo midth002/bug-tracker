@@ -40,7 +40,6 @@ const MemberListModal =
 
     const childToParent = (childdata) => {
       setMemberData(childdata);
-      console.log("members", memberData)
     }
 
 

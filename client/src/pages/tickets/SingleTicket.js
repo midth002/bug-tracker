@@ -12,6 +12,7 @@ import { Container } from '@mui/system';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Comments from '../../components/comments/Comments';
 
+
 const SingleTicket = () => {
 
     
@@ -31,13 +32,14 @@ const SingleTicket = () => {
         if (ticketLoading) return <Loading />;
         if (!ticketData) return <p>Not Found</p>;
 
-      const getTicketInformation = async () => {
-        console.log(ticketData.getOneTicket)
-      }
-
-    getTicketInformation();
-
+    
     const title = ticketData.getOneTicket.title
+
+    var date = ticketData.getOneTicket.createdAt;
+    var d = new Date(parseInt(date));
+    var ds = d.toString('MM/dd/yy');
+
+    console.log(ds);
 
 
     return (
@@ -68,7 +70,7 @@ const SingleTicket = () => {
                     description={ ticketData.getOneTicket.description}
                     // title={ticketData.getOneTicket.title} 
                     type={ticketData.getOneTicket.type}
-                    created={ticketData.getOneTicket.createdAt}
+                    created={ds}
                     submitter={ticketData.getOneTicket.submitter[0].username}
                     ticketId={ticketData.getOneTicket._id}
                     />

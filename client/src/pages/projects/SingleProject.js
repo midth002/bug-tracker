@@ -33,23 +33,20 @@ const SingleProject = () => {
 
 
     const title = projectData.getOneProject.title
-      console.log(projectData.getOneProject)
-
-
-
+    
     return (
         <div className="container">
 
         <Sidebar />
         <Jumbotron title={title}/>
-        <Grid container spacing={2}
+        <Grid container spacing={1}
         className="ticket" 
         sx={{ml: 14,
             mt: 7
         }}
         >
       
-               <Grid item xs={4} sx={{
+               <Grid item xs={5} sx={{
               
                }}>
               
@@ -60,11 +57,10 @@ const SingleProject = () => {
                     
               </Grid>
 
-              <Grid item xs={1}>
-                <div></div>
+              <Grid item xs={0.25} >
               </Grid>
               
-              <Grid item xs={4} 
+              <Grid item xs={5} 
            ><AddMember member={projectData.getOneProject.members} projectId={projectData.getOneProject._id}/></Grid>
           
                 
@@ -75,7 +71,6 @@ const SingleProject = () => {
               
               
             </Grid>
-            
             
         </div>
       )

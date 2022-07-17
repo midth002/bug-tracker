@@ -68,7 +68,7 @@ const Settings = () => {
             >
             <label className="settings-label">Email</label>
               <div>{userData.getOneUserByUsername[0].email}</div>
-              <Button color="secondary" variant="outlined" >Change Email</Button>
+              {/* <Button color="secondary" variant="outlined" >Change Email</Button> */}
             </Box>
 
             <Box 
@@ -80,13 +80,13 @@ const Settings = () => {
             }}
 
             >
-              <Button color="secondary" variant="outlined" >Change Password</Button>
+              {/* <Button color="secondary" variant="outlined" >Change Password</Button> */}
             </Box>
 
             <Box 
             sx={{mt: 5}}
             >
-              <Button color="error" variant="contained">Deactivate Account</Button>
+              {/* <Button color="error" variant="contained">Deactivate Account</Button> */}
             </Box>
         </Box>
       

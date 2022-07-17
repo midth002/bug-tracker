@@ -84,3 +84,15 @@ export const ADD_TICKET_TO_PROJECT = gql`mutation AddTicketToProject($projectId:
     }
   }
 }`;
+
+export const ADD_MEMBER_TO_PROJECT = gql`
+mutation AddMemberToProject($projectId: ID, $members: [MemberInput]) {
+  addMemberToProject(projectId: $projectId, members: $members) {
+    _id
+    title
+    members {
+      _id
+    }
+  }
+}
+`;

@@ -65,7 +65,7 @@ type Mutation {
     createTicket(submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
     createProject(title: String!, description: String, type: String!, members: [MemberInput]): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
-    addMemberToProject(projectId: ID, members: ID): Project
+    addMemberToProject(projectId: ID, members: [MemberInput]): Project
     login(username: String!, password: String!): Auth
     updateStatus(_id: ID!, status: String!): Ticket
     updateTicketChanges(_id: ID!, priority: String, description: String, type: String): Ticket

@@ -57,7 +57,6 @@ const ProjectModal = () => {
 
 
     const {loading, data, error: userError } = useQuery(ALL_USERS);
-
     if (!data) return <p>No users Found</p>;
     const userList = data?.allUsers || [];
 

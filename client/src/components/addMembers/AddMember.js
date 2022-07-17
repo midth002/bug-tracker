@@ -3,12 +3,11 @@ import { Box, Button} from '@mui/material';
 import { useQuery } from "@apollo/client";
 import { QUERY_ONE_PROJECT } from "../../utils/queries";
 import Loading from '../loading/Loading';
+import MemberListModal from './MemberListModal';
 import { DataGrid } from '@mui/x-data-grid';
 
 
-const AddMember = ({member}) => {
-
-   
+const AddMember = ({member, projectId}) => {
 
     console.log(member)
     const columns = [
@@ -54,7 +53,7 @@ const AddMember = ({member}) => {
         
         }}>
         <h5>Team </h5>
-        <Button sx={{fontSize: '12px', padding: 1}}>Add Member</Button>
+        <MemberListModal projectId={projectId} />
     </Box>
 
     <Box 

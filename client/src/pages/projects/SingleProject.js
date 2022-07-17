@@ -38,7 +38,6 @@ const SingleProject = () => {
 
         <Sidebar />
         <Jumbotron title={title}/>
-        {/* <GoBack /> */}
         <Grid container spacing={2}
         className="ticket" 
         sx={{ml: 14,
@@ -64,7 +63,7 @@ const SingleProject = () => {
               </Grid>
               
               <Grid item xs={4} 
-           ><AddMember member={projectData.getOneProject.members}/></Grid>
+           ><AddMember member={projectData.getOneProject.members} projectId={projectData.getOneProject._id}/></Grid>
           
                 
                <Grid item xs={10}>

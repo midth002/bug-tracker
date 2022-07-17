@@ -28,15 +28,14 @@ const Tickets = () => {
       username: username
     }
   });
+  const {loading: ticketsLoading, data: ticketData, error: ticketError} = 
+  useQuery(QUERY_TICKETS);
 
   if(userLoading) return <Loading />
 
-
-
   const user = userData.getOneUserByUsername[0]._id
 
-  const {loading: ticketsLoading, data: ticketData, error: ticketError} = 
-  useQuery(QUERY_TICKETS);
+
 
   
 

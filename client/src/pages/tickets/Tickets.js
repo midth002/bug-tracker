@@ -35,9 +35,7 @@ const Tickets = () => {
 
   const user = userData.getOneUserByUsername[0]._id
 
-
-
-  
+  console.log(user)
 
     if (ticketsLoading) return <Loading />;
     if (!ticketData) return <p>Not Found</p>;

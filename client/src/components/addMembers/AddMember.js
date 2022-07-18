@@ -9,7 +9,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const AddMember = ({member, projectId}) => {
 
-    console.log(member)
+ 
     const columns = [
         {field: '_id', headerName: 'ID', width: 100, hide: true},
         {
@@ -71,8 +71,7 @@ const AddMember = ({member, projectId}) => {
           rows={member}
           getRowId={row => row._id}
           columns={columns}
-          pageSize={3}
-          rowsPerPageOptions={[2]}
+          rowsPerPageOptions={[5]}
           rowHeight={30}
           headerHeight={20}
           sx = {{

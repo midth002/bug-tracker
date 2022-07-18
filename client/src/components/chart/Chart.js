@@ -34,13 +34,9 @@ const Chart = () => {
       
       if (projectsLoading) return <Loading />;
       if (!projectData) return <p>Not found</p>;
-      console.log(tickets)
         const projects = projectData?.allProjects || [];
         
-   
-
-
-
+  
       const priorityData = [
         {name: 'Low', value: lowPriority.length, fill: '#0088FE'},
          {name: 'Medium', value: medPriority.length, fill: '#00C49F'}, 
@@ -82,7 +78,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   return (
     <Box  sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', width: '95%', mt:2}} >
       
-     <Grid container xs={12} spacing={0}>
+     <Grid container  spacing={0}>
        <Grid item xs={4} align='center' justify='center'>
             <Box 
             bgcolor='white'
@@ -94,7 +90,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
                 m:1
               }}
           >
-           {/* <div><h4>Tickets By Priority</h4></div> */}
+         
         
      
       

@@ -102,6 +102,8 @@ const TicketModal = ({user}) => {
       setErrorMsg(false);
       setErrorMsgToggle(false);
     }
+
+
   
     const handleTicketFormSubmit = async (event) => {
         event.preventDefault();
@@ -121,9 +123,7 @@ const TicketModal = ({user}) => {
         const submitPriority = prioritySelectedOption.value
         const submitType = typeSelectedOption.value
 
-        console.log(submitPriority, submitType)
-        console.log(user)
-        console.log(ticket)
+  
  
         try {
             const { data } = await createTicket({
@@ -137,9 +137,9 @@ const TicketModal = ({user}) => {
                 
             })
 
-    
-         
-          if(!projectData == null) {
+          
+            console.log(projectData.value)
+          if (projectData.value !== 'null') {
             try {
               const { secondData } = await setTicketToProject({
                 variables: {
@@ -149,24 +149,24 @@ const TicketModal = ({user}) => {
               })
   
             } catch(e) {
-              alert('Adding a ticket to the project failed!')
+              
               console.error(JSON.stringify(e, null, 2))
              
             }
+          
           }
+            
 
           setShowModal(false);
           setNotification(true);
            
         } 
         
-       
-        
         catch (e) {
             console.log("failed")
             console.error(JSON.stringify(e, null, 2))
             setErrorMsgToggle(true);
-            setErrorMsg('Request was not sent! Please make sure Title, Description, and Type is entered.')
+            setErrorMsg('Request was not sent! Please make sure Title, Description, and Type and a ticket to a project is entered.')
 
         }  
       

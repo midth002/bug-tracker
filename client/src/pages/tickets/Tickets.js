@@ -21,7 +21,7 @@ const Tickets = () => {
 
   const title = 'TICKETS'
   const username = Auth.getUsername();
-  console.log(username)
+
   
   const {loading: userLoading, data: userData, error: userError} = useQuery(GET_USERNAME, {
     variables: {
@@ -35,7 +35,7 @@ const Tickets = () => {
 
   const user = userData.getOneUserByUsername[0]._id
 
-  console.log(user)
+
 
     if (ticketsLoading) return <Loading />;
     if (!ticketData) return <p>Not Found</p>;

@@ -19,12 +19,10 @@ const UserList = ({usernameList, childToParent, label}) => {
         const newUser = event.target.value; 
         const currentIndex = checkedUsers.indexOf(newUser);
         if (event.target.checked) {
-            console.log(`The user,  is checked`);
-           
+          
             newChecked.push({_id: newUser})
             
         } else {
-            console.log('Checkbox is unchecked')
             newChecked.splice(currentIndex, 1);
         }
         

@@ -24,7 +24,7 @@ const Settings = () => {
     if (userDataLoading) return <Loading />;
     if (!userData) return <p>Not Found</p>;
 
-    console.log(userData);
+  
 
     const title = "SETTINGS"
 

@@ -21,6 +21,16 @@ const userSchema = new Schema (
             minlength: 8
         },
 
+        firstName : {
+            type: String,
+            minlength: 1
+        },
+
+        lastName : {
+            type: String,
+            minlength: 1
+        },
+
         role: {
             type: String, 
             required: true

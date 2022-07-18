@@ -5,7 +5,7 @@ const ticketSchema = new Schema (
     {
         title: {
             type: String, 
-            required: true, 
+            // required: true, 
             trim: true,
             minlength: 1, 
             maxlength: 280
@@ -28,11 +28,11 @@ const ticketSchema = new Schema (
         }],
         priority: {
             type: String,
-            required: true
+            // required: true
         }, 
         type: {
            type: String,
-           required: true 
+        //    required: true 
         },
         status: {
             type: String,

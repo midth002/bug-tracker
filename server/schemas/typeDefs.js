@@ -4,12 +4,12 @@ const typeDefs = gql`
 
 type Ticket {
     _id: ID!
-    title: String!
+    title: String
     description: String
     submitter: [User]
-    priority: String!
-    type: String!
-    status: String!
+    priority: String
+    type: String
+    status: String
     createdAt: String
     assignedTo: [User]
 }
@@ -28,6 +28,8 @@ type User {
     email: String!
     role: String!
     password: String!
+    firstName: String
+    lastName: String
 }
 
 type Auth {
@@ -43,9 +45,14 @@ type Project {
     ticketId: [Ticket]
     members: [User]
     status: String!
+    createdAt: String
 }
 
 input MemberInput {
+    _id: ID
+}
+
+input assignMember {
     _id: ID
 }
 
@@ -61,8 +68,8 @@ type Query {
 }
 
 type Mutation {
-    createUser(username: String!, email: String!, role: String!, password: String!): Auth
-    createTicket(submitter: ID!, title: String!, description: String, priority: String!, type: String!): Ticket
+    createUser(username: String!, email: String!, role: String!, password: String!, firstName: String, lastName: String): Auth
+    createTicket(title: String, description: String, priority: String, type: String, submitter: ID, assignedTo: [assignMember]): Ticket
     createProject(title: String!, description: String, type: String!, members: [MemberInput]): Project
     addTicketToProject(projectId: ID, ticketId: ID): Project
     addMemberToProject(projectId: ID, members: [MemberInput]): Project

@@ -31,11 +31,11 @@ const resolvers = {
     },
 
     Mutation: {
-        createTicket: async(parent, args) => {
-            return await Ticket.create(args);
+        createTicket: async(parent, {title, description, type, priority, submitter, assignedTo}) => {
+            return await Ticket.create({title, description, type, priority, submitter, assignedTo});
         },
-        createUser: async(parent, { username, email, password, role}) => {
-            const user = await User.create({username, email, password, role});
+        createUser: async(parent, {username, email, password, role, firstName, lastName} ) => {
+            const user = await User.create({username, email, password, role, firstName, lastName});
             const token = signToken(user)
             return { token, user };
         },

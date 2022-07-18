@@ -42,7 +42,7 @@ const SingleTicket = () => {
     var d = new Date(parseInt(date));
     var ds = d.toString('MM/dd/yy');
 
-    console.log(ticketData.getOneTicket.priority);
+    console.log(ticketData.getOneTicket);
 
    
    

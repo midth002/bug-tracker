@@ -98,6 +98,8 @@ query GetOneUserByUsername($username: String!) {
     role
     username
     password
+    firstName
+    lastName
   }
 }`;
 

@@ -25,6 +25,7 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Label } from 'recharts';
+import { Alert, Snackbar } from '@mui/material';
 
 const options = [
   {value: 'Low', label: 'Low' },
@@ -43,6 +44,11 @@ const options = [
 const TicketForm = ({ ticketId, priority, title, description, type, created, submitter }) => {
   // const [typeSelectedOption, setTypeSelectedOption] = useState(null);
 
+  const [notification, setNotification] = useState(false);
+  const [errorMsgToggle, setErrorMsgToggle] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+ 
+
   const [prioritySelectedOption, setPrioritySelectedOption] = useState(priority);
   const [updateTicket, {error} ] = useMutation(SAVE_TICKET_CHANGES);
   const [ticketState, setTicketState] = useState({
@@ -50,6 +56,27 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
       description,
       title
   })
+
+
+  const handlePriorityChange = (event) => {
+    setPrioritySelectedOption(event.target.value);
+    console.log(prioritySelectedOption)
+  }
+
+  const handleAlertOpen = () => {
+    setNotification(true)
+}
+
+const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+   
+    setNotification(false);
+    setErrorMsg(false);
+    setErrorMsgToggle(false);
+  }
+
 
 
   const handleChange = (event) => {
@@ -64,18 +91,19 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
   const handleTicketChanges = async (event) => {
     event.preventDefault();
    
-    const submitPriority = prioritySelectedOption.value
+    console.log(prioritySelectedOption)
 
     try {
         const { data } = await updateTicket({
          
             variables: {
-              priority: submitPriority,
+              priority: prioritySelectedOption,
                 ...ticketState
             }
         })
 
        console.log("Success", data);
+       setNotification(true);
     } catch (e) {
         console.log("failed")
         console.error(JSON.stringify(e, null, 2))
@@ -101,17 +129,20 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
 
         <Grid item xs={12}>
           <label>Description</label>
-         <textarea name='description' defaultValue={description}></textarea>
+         <textarea name='description' defaultValue={description} onChange={handleChange}></textarea>
      </Grid>
 
         <Grid item xs={4} className="grid-item" align="center">
         <label>Priority</label>
        
      
-          <select>
-              <option>High</option>
-              <option>Medium</option>
-              <option>Low</option>
+          <select 
+          onChange={handlePriorityChange}
+          defaultValue={priority}
+          >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
           </select>
        
         </Grid>
@@ -151,11 +182,15 @@ const TicketForm = ({ ticketId, priority, title, description, type, created, sub
              <Button onClick={handleTicketChanges} variant="contained" >Save Changes</Button>
           </Grid>
        
-        {/* <Button onClick={handleTicketChanges} variant="contained">Save Changes</Button> */}
+       
         </Grid>
       </Box>
 
-  
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleAlertClose}>
+             <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
+                 Changes Saved!
+             </Alert>
+            </Snackbar>   
   
     </Container>
   </React.Fragment>

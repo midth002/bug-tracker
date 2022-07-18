@@ -56,12 +56,13 @@ const Settings = () => {
             </Box>
             <Box sx={{mt:3}}>
               <label className="settings-label">Full Name</label>
+              <div><p>{userData.getOneUserByUsername[0].firstName} {userData.getOneUserByUsername[0].lastName}</p></div>
             </Box>
             <Box 
               sx={{mt: 5}}
             >
               <label className="settings-label">Role</label>
-              <div>{userData.getOneUserByUsername[0].role}</div>
+              <div><p>{userData.getOneUserByUsername[0].role}</p></div>
             </Box>
             <Box
             sx={{mt: 5, display: 'block'}}

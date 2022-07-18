@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Box, Button, Typography, Modal, TextField} from '@mui/material'
+import {Box, Button, Typography, Modal, TextField, Alert, Snackbar} from '@mui/material'
 import Select from 'react-select';
 import { CREATE_TICKET, ADD_TICKET_TO_PROJECT } from '../../utils/mutations';
 import { QUERY_PROJECTS, ALL_USERS, GET_USERNAME } from '../../utils/queries';
@@ -38,6 +38,11 @@ const style = {
 const TicketModal = ({user}) => {
 
     const [showModal, setShowModal] = useState(false);
+
+    const [notification, setNotification] = useState(false);
+    const [errorMsgToggle, setErrorMsgToggle] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+
     const [memberData, setMemberData] = useState();
     const [projectData, setProjectData] = useState(null);
     const [typeSelectedOption, setTypeSelectedOption] = useState(null);
@@ -83,26 +88,57 @@ const TicketModal = ({user}) => {
         });
     
       };
+
+      const handleAlertOpen = () => {
+        setNotification(true)
+    }
     
+    const handleAlertClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+     
+      setNotification(false);
+      setErrorMsg(false);
+      setErrorMsgToggle(false);
+    }
   
     const handleTicketFormSubmit = async (event) => {
         event.preventDefault();
-         const submitPriority = prioritySelectedOption.value
+
+        if (typeSelectedOption == null) {
+          setErrorMsgToggle(true);
+          setErrorMsg('Please Enter a Type of Ticket')
+          return;
+        }
+
+        if (prioritySelectedOption == null) {
+          setErrorMsgToggle(true);
+          setErrorMsg('Please Enter a Priority of the Ticket')
+          return;
+        }
+
+        const submitPriority = prioritySelectedOption.value
         const submitType = typeSelectedOption.value
+
+        console.log(submitPriority, submitType)
+        console.log(user)
+        console.log(ticket)
  
         try {
             const { data } = await createTicket({
                 variables: {
                    priority: submitPriority,
                     type: submitType,
+                    assignTo: memberData,
                     ...ticket
                 }
             
                 
             })
 
-           console.log("Success", data);
-           console.log(projectData)
+    
+         
           if(!projectData == null) {
             try {
               const { secondData } = await setTicketToProject({
@@ -115,16 +151,28 @@ const TicketModal = ({user}) => {
             } catch(e) {
               alert('Adding a ticket to the project failed!')
               console.error(JSON.stringify(e, null, 2))
+             
             }
           }
+
+          setShowModal(false);
+          setNotification(true);
            
-        } catch (e) {
+        } 
+        
+       
+        
+        catch (e) {
             console.log("failed")
             console.error(JSON.stringify(e, null, 2))
-        }
+            setErrorMsgToggle(true);
+            setErrorMsg('Request was not sent! Please make sure Title, Description, and Type is entered.')
 
+        }  
       
     }
+
+    const label = "Assign Ticket To:"
 
   return (
     <div>
@@ -169,14 +217,30 @@ const TicketModal = ({user}) => {
 
           <ProjectDropDown projectList={projectList} childToParent={projectDropDownToModal}/>
 
-          <UserList usernameList={userList} childToParent={childToParent}/>
+          <UserList usernameList={userList} childToParent={childToParent} label={label} />
 
             <Button type="submit" color="success" variant="contained" sx={{mt:2}}>Create Ticket</Button>
+            { errorMsgToggle ? (
+            <Alert onClose={handleAlertClose} severity="error" sx={{ width: '80%' }}>
+                 {errorMsg}
+             </Alert>
+           ) : (
+            <></>
+           )
+            
+           }
             </form>
           
           
         </Box>
       </Modal>
+
+        
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleAlertClose}>
+             <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
+                 Ticket Created!
+             </Alert>
+            </Snackbar>   
   </div>
   )
 }

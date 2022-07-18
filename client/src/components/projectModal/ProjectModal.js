@@ -129,7 +129,7 @@ const ProjectModal = () => {
         
     }
 
-    
+    const label = "Add Members To The Project"
 
   return (
     <div>
@@ -166,7 +166,7 @@ const ProjectModal = () => {
         
           />
 
-          <UserList usernameList={userList} childToParent={childToParent}/>
+          <UserList usernameList={userList} childToParent={childToParent} label={label}/>
 
            
             <Button type="submit" color="success"  variant="contained" sx={{mt:2}}>Create Project</Button>

@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { ALL_USERS } from '../../utils/queries';
 
 
-const UserList = ({usernameList, childToParent}) => {
+const UserList = ({usernameList, childToParent, label}) => {
 
     const [checkedUsers, setCheckedUsers] = useState([]);
 
@@ -44,7 +44,7 @@ const UserList = ({usernameList, childToParent}) => {
     <Box
         sx={{mt: 2}}
     >
-        <label>Add Members</label>
+        <label>{label}</label>
         <List 
         sx={{
             position: 'relative',

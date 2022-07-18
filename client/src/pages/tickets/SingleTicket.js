@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import ProgressBar from '../../components/progressBar/ProgressBar';
 import TicketForm from '../../components/ticketForm/TicketForm';
@@ -11,11 +11,14 @@ import './singleticket.scss';
 import { Container } from '@mui/system';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Comments from '../../components/comments/Comments';
-
+import { Alert, Snackbar } from '@mui/material';
 
 const SingleTicket = () => {
 
     
+    const [notification, setNotification] = useState(false);
+    const [errorMsgToggle, setErrorMsgToggle] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const params = window.location.href;
     const paramArray = params.split('/');
@@ -39,7 +42,10 @@ const SingleTicket = () => {
     var d = new Date(parseInt(date));
     var ds = d.toString('MM/dd/yy');
 
-    console.log(ds);
+    console.log(ticketData.getOneTicket.priority);
+
+   
+   
 
 
     return (
@@ -91,6 +97,8 @@ const SingleTicket = () => {
             
             <Comments />
             </Box> */}
+
+      
         
         </Box>
       )

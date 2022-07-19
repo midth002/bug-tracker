@@ -1,6 +1,8 @@
   # Bug Tracker
 
    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+   [Heroku Live Link](https://peaceful-bastion-87144.herokuapp.com/)
   
   ## Table of Contents 
 
